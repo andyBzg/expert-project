@@ -1,0 +1,35 @@
+<configuration>
+
+    <!-- Конфігурація для аппендера у файл -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>mylog.log</file>
+        <encoder>
+            <pattern>%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level) [%thread] %yellow(%logger{15}) - %msg%n</pattern>
+
+<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n</pattern>-->
+        </encoder>
+        <!-- Зазначення фільтра для записування лише рівнів WARN і ERROR -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- Конфігурація для аппендера в консоль -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level) [%thread] %yellow(%logger{15}) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Визначення рівня логування для кореневого логера -->
+    <root level="info">
+        <!-- Використання аппендера у файл для рівнів WARN та ERROR -->
+        <appender-ref ref="FILE" />
+
+        <!-- Використання аппендера в консоль для всіх рівнів логування -->
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>
