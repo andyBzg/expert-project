@@ -2,7 +2,7 @@
 
     <!-- Конфігурація для аппендера у файл -->
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>mylog.log</file>
+        <file>logging.log</file>
         <encoder>
             <pattern>%cyan(%d{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level) [%thread] %yellow(%logger{15}) - %msg%n</pattern>
 
