@@ -1,5 +1,6 @@
 package com.example.expertprojectbackend.security.config;
 
+import com.example.expertprojectbackend.security.roles.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -20,8 +21,15 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-                .httpBasic(Customizer.withDefaults())
+                .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/v3/api-docs/**").permitAll();
+                    auth.requestMatchers("/swagger-ui/**").permitAll();
+                    auth.requestMatchers("/swagger-ui.html").permitAll();
+
+                    auth.requestMatchers("/**").hasRole(Role.ADMIN.name());
+                })
+                .formLogin(formLogin -> formLogin.defaultSuccessUrl("/swagger-ui.html"))
+                .logout(Customizer.withDefaults())
                 .build();
     }
 
