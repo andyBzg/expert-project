@@ -27,7 +27,7 @@ public class AdminConfig {
             String encodedPassword = passwordEncoder.encode(adminPassword);
             userDetailsManager.createUser(User.withUsername(adminUsername)
                     .password(encodedPassword)
-                    .roles(Role.ADMIN.name())
+                    .roles(Role.ADMIN.name(), Role.EXPERT.name(), Role.USER.name())
                     .build());
         }
     }
