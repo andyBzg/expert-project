@@ -17,7 +17,7 @@ public class TestController {
     @GetMapping(value = "/home")
     public ResponseEntity<String> getGreetingsMsg(Principal principal, HttpSession session) {
         incrementCount(session, HOME_VIEW_COUNT);
-        return ResponseEntity.ok("Hello, " + principal);
+        return ResponseEntity.ok("Hello, " + principal.getName());
     }
 
     @GetMapping("/count")
