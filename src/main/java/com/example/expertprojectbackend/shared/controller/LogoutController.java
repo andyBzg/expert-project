@@ -1,4 +1,4 @@
-package com.example.expertprojectbackend.controller;
+package com.example.expertprojectbackend.shared.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;

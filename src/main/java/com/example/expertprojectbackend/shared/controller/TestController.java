@@ -1,4 +1,4 @@
-package com.example.expertprojectbackend.controller;
+package com.example.expertprojectbackend.shared.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
