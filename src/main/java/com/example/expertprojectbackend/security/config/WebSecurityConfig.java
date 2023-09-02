@@ -26,6 +26,11 @@ public class WebSecurityConfig {
                     auth.requestMatchers("/swagger-ui/**").permitAll();
                     auth.requestMatchers("/swagger-ui.html").permitAll();
 
+                    auth.requestMatchers("/expert/registration").permitAll();
+                    auth.requestMatchers("api/test/home").permitAll();
+                    auth.requestMatchers("api/test/count").permitAll();
+
+                    auth.requestMatchers("/expert/change-password").hasRole(Role.EXPERT.name());
                     auth.requestMatchers("/**").hasRole(Role.ADMIN.name());
                 })
                 .formLogin(formLogin -> formLogin.defaultSuccessUrl("/swagger-ui.html"))
