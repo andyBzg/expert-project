@@ -1,8 +1,9 @@
 package com.example.expertprojectbackend.expert.service.database;
 
-import com.example.expertprojectbackend.expert.dto.ExpertDto;
+import com.example.expertprojectbackend.expert.dto.ExpertRegistrationDto;
 
 public interface ExpertDatabaseService {
 
-    void create(ExpertDto expertDto);
+    void registerNewExpert(ExpertRegistrationDto expertDto);
+
 }
