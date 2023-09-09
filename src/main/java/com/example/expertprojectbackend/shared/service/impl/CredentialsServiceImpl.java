@@ -5,6 +5,7 @@ import com.example.expertprojectbackend.shared.service.CredentialsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -32,5 +33,17 @@ public class CredentialsServiceImpl implements CredentialsService {
         String encodedNewPassword = passwordEncoder.encode(newPasswordFromDto);
         userDetailsManager.changePassword(storedPassword, encodedNewPassword);
         log.info("Password changed for user {}", currentUsername);
+    }
+
+    @Override
+    public void registerCredentials(String email, String password, String role) {
+        String encodedPassword = passwordEncoder.encode(password);
+
+        userDetailsManager.createUser(User.withUsername(email)
+                .password(encodedPassword)
+                .roles(role)
+                .build());
+
+        log.info("Credentials registered");
     }
 }
