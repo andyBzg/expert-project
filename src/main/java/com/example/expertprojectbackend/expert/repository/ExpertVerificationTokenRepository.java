@@ -1,11 +1,9 @@
 package com.example.expertprojectbackend.expert.repository;
 
-import com.example.expertprojectbackend.expert.entity.Expert;
+import com.example.expertprojectbackend.expert.entity.ExpertVerificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 @Repository
-public interface ExpertRepository extends JpaRepository<Expert, UUID> {
+public interface ExpertVerificationTokenRepository extends JpaRepository<ExpertVerificationToken, Long> {
 }

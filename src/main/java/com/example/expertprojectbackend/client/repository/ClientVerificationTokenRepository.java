@@ -1,11 +1,9 @@
 package com.example.expertprojectbackend.client.repository;
 
-import com.example.expertprojectbackend.client.entity.Client;
+import com.example.expertprojectbackend.client.entity.ClientVerificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 @Repository
-public interface ClientRepository extends JpaRepository<Client, UUID> {
+public interface ClientVerificationTokenRepository extends JpaRepository<ClientVerificationToken, Long> {
 }
