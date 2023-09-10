@@ -12,6 +12,7 @@ import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.time.ZoneId;
 import java.util.UUID;
 
 @Entity
@@ -33,9 +34,14 @@ public class Client {
     @Column(columnDefinition = "boolean default false")
     private boolean isDeleted;
 
+    @Column(columnDefinition = "boolean default false")
+    private boolean isExpert;
+
+    @NaturalId
+    private String email;
+
     private String firstName;
     private String lastName;
-
-    @NaturalId(mutable = true)
-    private String email;
+    private String phone;
+    private ZoneId timeZone;
 }

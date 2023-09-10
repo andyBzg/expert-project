@@ -1,5 +1,6 @@
 package com.example.expertprojectbackend.shared.exception_handler;
 
+import com.example.expertprojectbackend.shared.exception.TokenNotFoundException;
 import com.example.expertprojectbackend.shared.exception.UserAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -14,5 +15,11 @@ public class CustomExceptionHandler {
     public ResponseEntity<String> handleUserAlreadyExistsException() {
         log.error("User already exists in Database");
         return ResponseEntity.badRequest().build();
+    }
+
+    @ExceptionHandler(TokenNotFoundException.class)
+    public ResponseEntity<String> handleTokenNotFoundException() {
+        log.error("Token not found");
+        return ResponseEntity.notFound().build();
     }
 }
