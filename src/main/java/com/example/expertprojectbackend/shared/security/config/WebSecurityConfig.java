@@ -26,8 +26,8 @@ public class WebSecurityConfig {
                     auth.requestMatchers("/swagger-ui/**").permitAll();
                     auth.requestMatchers("/swagger-ui.html").permitAll();
 
-                    auth.requestMatchers("/api/register/verifyEmail").permitAll();
-                    auth.requestMatchers("/api/register/new-user").permitAll();
+                    auth.requestMatchers("/api/register/**").permitAll();
+
                     auth.requestMatchers("/api/test/home").authenticated();
                     auth.requestMatchers("/api/test/count").authenticated();
 

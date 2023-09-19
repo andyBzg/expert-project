@@ -11,4 +11,6 @@ public interface RegistrationService {
     void saveVerificationToken(String token, User user);
 
     void verifyRegistration(String token);
+
+    void resendVerificationToken(String email, HttpServletRequest request);
 }

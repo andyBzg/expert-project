@@ -12,6 +12,7 @@ import com.example.expertprojectbackend.shared.security.database.UserAuthority;
 import com.example.expertprojectbackend.shared.exception.UserAlreadyExistsException;
 import com.example.expertprojectbackend.shared.security.roles.Role;
 import com.example.expertprojectbackend.shared.security.service.CredentialsService;
+import com.example.expertprojectbackend.shared.service.EmailService;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +37,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final ClientDatabaseService clientDatabaseService;
     private final VerificationTokenRepository tokenRepository;
     private final ApplicationEventPublisher eventPublisher;
+    private final EmailService emailService;
 
     private static final String ROLE_PREFIX = "ROLE_";
 
@@ -68,12 +70,12 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
+    @Transactional
     public void verifyRegistration(String token) {
         if (token == null || StringUtils.isEmpty(token)) {
             throw new IllegalArgumentException("Parameter cannot be null or empty");
         }
-        Optional<VerificationToken> tokenOptional = tokenRepository.findByToken(token);
-        VerificationToken verificationToken = tokenOptional
+        VerificationToken verificationToken = tokenRepository.findByToken(token)
                 .orElseThrow(() -> new TokenNotFoundException("Token not found"));
 
         if (verificationToken.getUser().isEnabled()) {
@@ -82,6 +84,26 @@ public class RegistrationServiceImpl implements RegistrationService {
             validateToken(verificationToken);
             enableUser(verificationToken);
         }
+    }
+
+    @Override
+    @Transactional
+    public void resendVerificationToken(String email, HttpServletRequest request) {
+        VerificationToken verificationToken = tokenRepository.findByUsername(email)
+                .orElseThrow(() -> new TokenNotFoundException("Token not found"));
+        Instant expirationTime = verificationToken.calculateTokenExpirationTime();
+
+        verificationToken.setToken(UUID.randomUUID().toString());
+        verificationToken.setExpirationTime(expirationTime);
+
+        tokenRepository.save(verificationToken);
+        log.info("Verification token refreshed");
+        resendConfirmationEmail(email, getApplicationUrl(request), verificationToken);
+    }
+
+    private void resendConfirmationEmail(String email, String applicationUrl, VerificationToken verificationToken) {
+        String url = applicationUrl + "/api/register/verifyEmail?token=" + verificationToken;
+        emailService.sendRegistrationConfirmationEmail(email, url);
     }
 
     private void enableUser(VerificationToken verificationToken) {

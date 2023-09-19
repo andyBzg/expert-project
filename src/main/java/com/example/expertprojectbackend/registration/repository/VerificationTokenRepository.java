@@ -15,6 +15,9 @@ public interface VerificationTokenRepository extends JpaRepository<VerificationT
 
     Optional<VerificationToken> findByToken(String token);
 
+    @Query("SELECT token FROM VerificationToken token WHERE token.user.username = :username")
+    Optional<VerificationToken> findByUsername(String username);
+
     @Query("SELECT token.id FROM VerificationToken token WHERE token.expirationTime <= :currentTime")
     List<Long> findExpiredTokenIds(Instant currentTime);
 
