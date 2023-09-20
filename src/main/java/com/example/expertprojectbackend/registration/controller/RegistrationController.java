@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,14 +30,14 @@ public class RegistrationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(registrationDto);
     }
 
-    @PostMapping("/verifyEmail")
+    @GetMapping("/verifyEmail")
     public ResponseEntity<String> verifyEmail(@RequestParam("token") String token) {
         log.info("Registration verification request");
         registrationService.verifyRegistration(token);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/resend-confirmation-email")
+    @GetMapping("/resend-confirmation-email")
     public ResponseEntity<String> resendConfirmationEmail(
             @RequestParam("email") String email, final HttpServletRequest request) {
         log.info("New confirmation email request");

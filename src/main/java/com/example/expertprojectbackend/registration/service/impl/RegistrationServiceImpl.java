@@ -102,7 +102,8 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     private void resendConfirmationEmail(String email, String applicationUrl, VerificationToken verificationToken) {
-        String url = applicationUrl + "/api/register/verifyEmail?token=" + verificationToken;
+        String token = verificationToken.getToken();
+        String url = applicationUrl + "/api/register/verifyEmail?token=" + token;
         emailService.sendRegistrationConfirmationEmail(email, url);
     }
 
