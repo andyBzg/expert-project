@@ -1,8 +1,35 @@
-version: '3.1'
+version: '3.8'
 
 services:
+
+  expert-app:
+    image: expert-app-image:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - pj-expert-network
+    depends_on:
+      - mysql
+      - redis
 
   redis:
     image: "redis:alpine"
     ports:
       - "6379:6379"
+    networks:
+      - pj-expert-network
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3307:3306"
+    networks:
+      - pj-expert-network
+    environment:
+      MYSQL_DATABASE: expertProject
+      MYSQL_PASSWORD: 1112
+      MYSQL_ROOT_PASSWORD: 1112
+
+networks:
+  pj-expert-network:
+    driver: bridge
