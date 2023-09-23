@@ -27,11 +27,12 @@ public class WebSecurityConfig {
                     auth.requestMatchers("/swagger-ui.html").permitAll();
 
                     auth.requestMatchers("/api/register/**").permitAll();
+                    auth.requestMatchers("/api/password-reset/**").permitAll();
 
                     auth.requestMatchers("/api/test/home").authenticated();
                     auth.requestMatchers("/api/test/count").authenticated();
 
-                    auth.requestMatchers("/api/credentials/change-password").hasRole(Role.CLIENT.name());
+                    auth.requestMatchers("/api/credentials/change-password").authenticated();
                     auth.requestMatchers("/**").hasRole(Role.ADMIN.name());
                 })
                 .formLogin(formLogin -> formLogin.defaultSuccessUrl("/swagger-ui.html"))

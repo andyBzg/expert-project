@@ -11,7 +11,13 @@ import org.springframework.stereotype.Service;
 public class EmailServiceImpl implements EmailService {
     @Override
     public void sendRegistrationConfirmationEmail(String email, String verificationUrl) {
-        //TODO add email sending logic
+        // TODO add email sending logic
         log.info("Confirmation email sent. Verification url: {}", verificationUrl);
+    }
+
+    @Override
+    public void sendPasswordResetEmail(String email, String passwordResetUrl) {
+        // TODO add email sending logic
+        log.info("Password reset email sent. Reset url: {}", passwordResetUrl);
     }
 }
