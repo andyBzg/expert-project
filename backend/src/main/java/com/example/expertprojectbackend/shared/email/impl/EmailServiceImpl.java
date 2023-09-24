@@ -1,6 +1,6 @@
-package com.example.expertprojectbackend.shared.service.impl;
+package com.example.expertprojectbackend.shared.email.impl;
 
-import com.example.expertprojectbackend.shared.service.EmailService;
+import com.example.expertprojectbackend.shared.email.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

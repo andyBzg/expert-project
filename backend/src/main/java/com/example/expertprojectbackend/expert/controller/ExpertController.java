@@ -1,9 +1,9 @@
 package com.example.expertprojectbackend.expert.controller;
 
-import com.example.expertprojectbackend.shared.dto.ChangePasswordDto;
+import com.example.expertprojectbackend.password.dto.PasswordChangeDto;
 import com.example.expertprojectbackend.expert.dto.ExpertRegistrationDto;
 import com.example.expertprojectbackend.expert.service.database.ExpertService;
-import com.example.expertprojectbackend.shared.security.service.CredentialsService;
+import com.example.expertprojectbackend.password.service.PasswordChangeService;
 import com.example.expertprojectbackend.shared.util.session.CurrentSessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExpertController {
 
     private final ExpertService expertService;
-    private final CredentialsService credentialsService;
+    private final PasswordChangeService passwordChangeService;
     private final CurrentSessionUtil currentSessionUtil;
 
     @PostMapping(value = "/registration")
@@ -35,10 +35,10 @@ public class ExpertController {
     }
 
     @PostMapping("/change-password")
-    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDto changePasswordDto) {
+    public ResponseEntity<String> changePassword(@RequestBody PasswordChangeDto passwordChangeDto) {
         String currentUsername = currentSessionUtil.getCurrentUsername();
         log.info("Expert password change request");
-        credentialsService.changePassword(currentUsername, changePasswordDto);
+        passwordChangeService.changePassword(currentUsername, passwordChangeDto);
         return ResponseEntity.ok().build();
     }
 }

@@ -8,7 +8,7 @@ import com.example.expertprojectbackend.expert.repository.ExpertVerificationToke
 import com.example.expertprojectbackend.expert.entity.ExpertVerificationToken;
 import com.example.expertprojectbackend.expert.event.ExpertRegistrationEvent;
 import com.example.expertprojectbackend.shared.exception.UserAlreadyExistsException;
-import com.example.expertprojectbackend.shared.security.service.CredentialsService;
+import com.example.expertprojectbackend.security.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class ExpertServiceImpl implements ExpertService {
 
     private final ExpertRepository expertRepository;
     private final JdbcUserDetailsManager userDetailsManager;
-    private final CredentialsService credentialsService;
+    private final UserService userService;
     private final ApplicationEventPublisher eventPublisher;
     private final ExpertVerificationTokenRepository tokenRepository;
 
@@ -39,7 +39,7 @@ public class ExpertServiceImpl implements ExpertService {
             throw new UserAlreadyExistsException("Unable to register username, already exists in DB");
         }
 
-        credentialsService.registerCredentials(email, password);
+        userService.registerCredentials(email, password);
         saveExpertToDatabase(expertRegistrationDto, applicationUrl);
         log.info("New expert successfully registered and waiting for email verification");
     }

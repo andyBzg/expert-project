@@ -1,4 +1,4 @@
-package com.example.expertprojectbackend.shared.security.database;
+package com.example.expertprojectbackend.security.database;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

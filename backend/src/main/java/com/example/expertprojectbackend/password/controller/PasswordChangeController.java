@@ -1,7 +1,7 @@
-package com.example.expertprojectbackend.shared.controller;
+package com.example.expertprojectbackend.password.controller;
 
-import com.example.expertprojectbackend.shared.dto.ChangePasswordDto;
-import com.example.expertprojectbackend.shared.security.service.CredentialsService;
+import com.example.expertprojectbackend.password.service.PasswordChangeService;
+import com.example.expertprojectbackend.password.dto.PasswordChangeDto;
 import com.example.expertprojectbackend.shared.util.session.CurrentSessionUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/credentials")
+@RequestMapping("api/password-change")
 @RequiredArgsConstructor
 @Slf4j
-public class CredentialsController {
+public class PasswordChangeController {
 
-    private final CredentialsService credentialsService;
+    private final PasswordChangeService passwordChangeService;
     private final CurrentSessionUtil currentSessionUtil;
 
-    @PostMapping("/change-password")
-    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDto changePasswordDto) {
+    @PostMapping("/change")
+    public ResponseEntity<String> changePassword(@RequestBody PasswordChangeDto passwordChangeDto) {
         String currentUsername = currentSessionUtil.getCurrentUsername();
         log.info("Client password change request");
-        credentialsService.changePassword(currentUsername, changePasswordDto);
+        passwordChangeService.changePassword(currentUsername, passwordChangeDto);
         return ResponseEntity.ok().build();
     }
 }

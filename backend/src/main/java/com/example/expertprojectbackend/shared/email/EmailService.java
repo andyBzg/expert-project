@@ -1,4 +1,4 @@
-package com.example.expertprojectbackend.shared.service;
+package com.example.expertprojectbackend.shared.email;
 
 public interface EmailService {
 

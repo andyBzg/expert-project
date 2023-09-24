@@ -7,7 +7,7 @@ import com.example.expertprojectbackend.shared.exception.InvalidTokenException;
 import com.example.expertprojectbackend.shared.exception.PasswordMismatchException;
 import com.example.expertprojectbackend.password.dto.PasswordResetRequestDto;
 import com.example.expertprojectbackend.password.service.PasswordResetTokenService;
-import com.example.expertprojectbackend.shared.service.EmailService;
+import com.example.expertprojectbackend.shared.email.EmailService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

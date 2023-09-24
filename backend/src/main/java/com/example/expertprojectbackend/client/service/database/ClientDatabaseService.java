@@ -1,8 +1,8 @@
 package com.example.expertprojectbackend.client.service.database;
 
-import com.example.expertprojectbackend.shared.security.database.User;
+import com.example.expertprojectbackend.client.entity.Client;
 
 public interface ClientDatabaseService {
 
-    void saveClientToDatabase(User user);
+    void saveClientToDatabase(Client client);
 }

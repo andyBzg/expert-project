@@ -1,6 +1,6 @@
-package com.example.expertprojectbackend.shared.security.config;
+package com.example.expertprojectbackend.security.config;
 
-import com.example.expertprojectbackend.shared.security.roles.Role;
+import com.example.expertprojectbackend.security.roles.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -29,10 +29,14 @@ public class WebSecurityConfig {
                     auth.requestMatchers("/api/register/**").permitAll();
                     auth.requestMatchers("/api/password-reset/**").permitAll();
 
+                    /* these endpoints only for testing purposes */
                     auth.requestMatchers("/api/test/home").authenticated();
                     auth.requestMatchers("/api/test/count").authenticated();
+                    /* --- */
 
-                    auth.requestMatchers("/api/credentials/change-password").authenticated();
+                    auth.requestMatchers("/api/password-change/change").authenticated();
+
+                    auth.requestMatchers("/api/client/**").hasRole(Role.CLIENT.name());
                     auth.requestMatchers("/**").hasRole(Role.ADMIN.name());
                 })
                 .formLogin(formLogin -> formLogin.defaultSuccessUrl("/swagger-ui.html"))

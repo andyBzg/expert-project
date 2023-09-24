@@ -1,6 +1,6 @@
-package com.example.expertprojectbackend.shared.security.config;
+package com.example.expertprojectbackend.security.config;
 
-import com.example.expertprojectbackend.shared.security.roles.Role;
+import com.example.expertprojectbackend.security.roles.Role;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

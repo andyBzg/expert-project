@@ -1,4 +1,4 @@
-package com.example.expertprojectbackend.shared.exception_handler;
+package com.example.expertprojectbackend.shared.handler;
 
 import com.example.expertprojectbackend.shared.exception.InvalidTokenException;
 import com.example.expertprojectbackend.shared.exception.PasswordMismatchException;
