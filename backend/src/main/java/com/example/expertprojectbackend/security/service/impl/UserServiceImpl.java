@@ -78,6 +78,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void changePassword(String username, String newPassword) {
+        UserDetails userDetails = userDetailsManager.loadUserByUsername(username);
+        String storedPassword = userDetails.getPassword();
+
+        String encodedNewPassword = passwordEncoder.encode(newPassword);
+        userDetailsManager.changePassword(storedPassword, encodedNewPassword);
+    }
+
+    @Override
     public void deleteUser(String username) {
         userDetailsManager.deleteUser(username);
     }

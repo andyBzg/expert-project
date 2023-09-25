@@ -13,6 +13,8 @@ public interface UserService {
 
     User findByUsername(String username);
 
+    void changePassword(String username, String newPassword);
+
     void deleteUser(String username);
 
     void deleteUnverifiedUsers(List<String> usernames);

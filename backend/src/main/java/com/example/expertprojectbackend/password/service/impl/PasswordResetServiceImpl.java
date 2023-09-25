@@ -3,6 +3,8 @@ package com.example.expertprojectbackend.password.service.impl;
 import com.example.expertprojectbackend.password.dto.PasswordResetDto;
 import com.example.expertprojectbackend.password.service.PasswordResetService;
 import com.example.expertprojectbackend.password.token.PasswordResetToken;
+import com.example.expertprojectbackend.security.database.User;
+import com.example.expertprojectbackend.security.service.UserService;
 import com.example.expertprojectbackend.shared.exception.InvalidTokenException;
 import com.example.expertprojectbackend.shared.exception.PasswordMismatchException;
 import com.example.expertprojectbackend.password.dto.PasswordResetRequestDto;
@@ -12,10 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 
 
@@ -24,16 +23,15 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class PasswordResetServiceImpl implements PasswordResetService {
 
-    private final JdbcUserDetailsManager userDetailsManager;
+    private final UserService userService;
     private final PasswordResetTokenService passwordResetTokenService;
-    private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
 
 
     @Override
     public void requestPasswordReset(PasswordResetRequestDto resetRequestDto, HttpServletRequest request) {
         String email = resetRequestDto.email();
-        if (!userDetailsManager.userExists(email)) {
+        if (!userService.userExists(email)) {
             throw new UsernameNotFoundException("User not found with username: " + email);
         }
 
@@ -50,7 +48,7 @@ public class PasswordResetServiceImpl implements PasswordResetService {
             throw new InvalidTokenException("Token validation failed");
         }
 
-        UserDetails user = userDetailsManager.loadUserByUsername(resetToken.getUsername());
+        User user = userService.findByUsername(resetToken.getUsername());
         if (!user.isEnabled()) {
             throw new DisabledException("User is disabled. Forbidden to change password");
         }
@@ -70,11 +68,7 @@ public class PasswordResetServiceImpl implements PasswordResetService {
         PasswordResetToken resetToken = passwordResetTokenService.findByToken(token);
         String username = resetToken.getUsername();
 
-        UserDetails userDetails = userDetailsManager.loadUserByUsername(username);
-        String storedPassword = userDetails.getPassword();
-
-        String encodedNewPassword = passwordEncoder.encode(password);
-        userDetailsManager.changePassword(storedPassword, encodedNewPassword);
+        userService.changePassword(username, password);
         log.info("Password changed for user {}", username);
     }
 
@@ -82,7 +76,7 @@ public class PasswordResetServiceImpl implements PasswordResetService {
         return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
 
-    private void sendPasswordResetEmail(String applicationUrl, String userEmail, String token) {
+    public void sendPasswordResetEmail(String applicationUrl, String userEmail, String token) {
         String resetUrl = applicationUrl + "/api/password-reset/reset?token=" + token;
         emailService.sendPasswordResetEmail(userEmail, resetUrl);
     }
