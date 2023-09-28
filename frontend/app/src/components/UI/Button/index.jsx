@@ -7,7 +7,7 @@ import s from './style.module.css'
 // secondary,
 
 //rounded: rounded
-//upcase: true
+//uppercase: uppercase
 
 //sizes: size_m, size_l, size_xl
 

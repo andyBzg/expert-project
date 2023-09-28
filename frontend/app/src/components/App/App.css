@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: var(--font-family-main);
 }
 
 input,
@@ -10,6 +11,10 @@ textarea,
 select {
   margin: 0;
   font: inherit;
+}
+
+a {
+  text-decoration: none;
 }
 
 :root {
@@ -26,13 +31,15 @@ select {
   --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
 
   /* colors */
-  --bg-color: #F5F5F5;
+  --bg-color: #f5f5f5;
+  --font-color-main: #363636;
+  --font-color-secondary: #9f9f9f;
   --primary-color: #2c5cf9;
-  --primary-color-1: #14134E;
+  --primary-color-1: #14134e;
   --primary-color-2: #050515;
   --secondary-color: #f4e360;
-  --secondary-color-1: #F7A93F;
-  --secondary-color-2: #FA6C20;
+  --secondary-color-1: #f7a93f;
+  --secondary-color-2: #fa6c20;
 
   /* sizes */
   --navbar-height: 70px;
