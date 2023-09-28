@@ -21,6 +21,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    white-space: nowrap;
+    flex-wrap: wrap;
   }
   
   .links li {
@@ -38,3 +40,28 @@
   .links a.active {
     color: #ff5722;
   }
+
+  .links a{
+    background: none;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    cursor: pointer;
+    color: #dddfd4;
+  }
+  .links a{  
+    
+    transition: 0.25s;
+    
+    &:hover,
+    &:focus { 
+      border: 2px solid #fae596;
+      color: #fae596;
+    }
+  }
+  
+  .links a:hover,
+  .links a:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}

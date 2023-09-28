@@ -24,6 +24,7 @@
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     position: relative;
+    color:#dddfd4
   }
   
   /* Стили для кнопки закрытия */
@@ -43,6 +44,7 @@
   
   label {
     margin: 10px 0;
+    color:#dddfd4;
   }
   
   input {
@@ -50,6 +52,7 @@
     margin: 5px 0;
     border: 1px solid #ccc;
     width: 100%;
+    
   }
   
  
