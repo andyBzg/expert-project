@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from '../UI/Container';
-import logo from "../../media/Logo2.jpg";
+import logo from "../../media/23-removebg-preview.png";
 import { Link } from 'react-router-dom';
 import s from "./style.module.css";
 import RegistrationModal from '../RegistrationModal';

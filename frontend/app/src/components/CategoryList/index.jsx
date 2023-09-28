@@ -17,7 +17,7 @@ const CategoryList = () => {
     ]
 
     return (
-        <Container>
+        <Container className={s.container}>
             <div className={s.content}>
                 <div className={ s.category_list}>
                     {

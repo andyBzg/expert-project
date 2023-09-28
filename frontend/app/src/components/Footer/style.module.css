@@ -1,6 +1,7 @@
 /* Общие стили для футера */
 .footer {
-    background-color: #3fb0ac;
+    /* background-image: linear-gradient(to right, blue, grey, blue); */
+    background-color:var(--primary-color); 
     color: #dddfd4;
     padding: 20px 0;
     text-align: center;
@@ -10,7 +11,7 @@
   /* Стили для логотипа */
   .logo img {
     margin: 10px;
-    max-width: 72px;
+    max-width: 100px;
     height: auto;
   }
   
