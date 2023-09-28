@@ -1,0 +1,44 @@
+.logo img{
+    height: 72px;
+    width: 72px;
+    margin: 10px;
+}
+.container{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3fb0ac;
+}
+.registration_login{
+    padding-right: 50px;
+    display:flex;
+    justify-content: space-between;
+    gap: 50px;
+    align-items: center;
+}
+.btn {
+    background: none;
+    border: 2px solid #dddfd4;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 1em 2em;
+    cursor: pointer;
+    color: #dddfd4;
+  }
+  .btn {  
+    
+    transition: 0.25s;
+    
+    &:hover,
+    &:focus { 
+      border: 2px solid #fae596;
+      color: #fae596;
+    }
+  }
+  
+  .btn:hover,
+  .btn:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}

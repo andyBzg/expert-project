@@ -1,0 +1,86 @@
+/* Стили для темного фона */
+.modal_overlay {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    z-index: 1000; 
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Стили для модального окна */
+  .modal {
+    
+    background-color: #3fb0ac;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  /* Стили для кнопки закрытия */
+  .close_button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  /* Стили для формы и ее элементов */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  label {
+    margin: 10px 0;
+  }
+  
+  input {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+  
+ 
+  a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .btn {
+    background: none;
+    border: 2px solid #dddfd4;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 1em 2em;
+    cursor: pointer;
+    color: #dddfd4;
+  }
+  .btn {  
+    
+    transition: 0.25s;
+    
+    &:hover,
+    &:focus { 
+      border: 2px solid #fae596;
+      color: #fae596;
+    }
+  }
+  
+  .btn:hover,
+  .btn:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
