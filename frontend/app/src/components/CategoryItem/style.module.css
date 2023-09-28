@@ -1,0 +1,24 @@
+.item {
+    width: calc(100% / 6 - 20px);
+}
+.category {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 0;
+    gap: 10px;
+}
+.title {
+    text-align: center;
+    color: var(--font-color-secondary);
+}
+.title::after {
+    content: "";
+    margin: 0 0.5em;
+    display: inline-block;
+    border: 5px solid transparent;
+    border-top: 6px solid var(--font-color-secondary);
+    border-bottom: 0 none;
+}

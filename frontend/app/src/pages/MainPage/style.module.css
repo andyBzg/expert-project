@@ -1,0 +1,32 @@
+.page {
+    width: 100%;
+    min-height: 100vh;
+}
+.content {
+    max-width: 940px;
+    margin: 0 auto;
+}
+.poster {
+    background-color: #52acff;
+    background-image: linear-gradient(180deg, #52acff 25%, #ffe32cd0 100%);
+    background-size: 100%;
+}
+.title {
+    text-align: center;
+    padding: 150px 0 50px;
+    font-size: 40px;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: var(--primary-color-2)
+}
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px 0 150px;
+}
+.categories_container{
+    width: 100%;
+    background-color: var(--bg-color)
+}
