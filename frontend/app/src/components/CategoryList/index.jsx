@@ -10,20 +10,18 @@ const CategoryList = () => {
         { categoryId: 3, title: 'Юриспруденция', img: '', link: 'law' },
         { categoryId: 4, title: 'Учеба и наука', img: '', link: 'study' },
         { categoryId: 5, title: 'IT Технологии', img: '', link: 'it' },
-        { categoryId: 6, title: 'Другое', img: '', link: 'other' },
-        // { categoryId: 7, title: 'Красота и здоровье', img: '', link: 'beauty' },
-        // { categoryId: 8, title: 'Бизнес', img: '', link: 'bussines' },
-        // { categoryId: 9, title: 'Авто', img: '', link: 'autos' },
+        { categoryId: 6, title: 'Красота и здоровье', img: '', link: 'beauty' },
+        { categoryId: 7, title: 'Бизнес', img: '', link: 'bussines' },
+        { categoryId: 8, title: 'Авто', img: '', link: 'autos' },
+        { categoryId: 9, title: 'Другое', img: '', link: 'other' },
     ]
 
     return (
         <Container className={s.container}>
-            <div className={s.content}>
-                <div className={ s.category_list}>
-                    {
-                        data.map(el => <CategoryItem {...el} key={el.categoryId} />)
-                    }
-                </div>
+            <div className={s.category_list}>
+                {
+                    data.map(el => <CategoryItem {...el} key={el.categoryId} />)
+                }
             </div>
         </Container>
     );

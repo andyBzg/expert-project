@@ -7,9 +7,7 @@ import CategoryList from '../../components/CategoryList'
 export default function MainPage() {
   return (
     <div className={s.page}>
-      <div className={s.poster}>
-        <Container>
-          <div className={s.content}>
+        <Container className={s.poster}>
             <h1 className={s.title}>Есть вопрос? Задай эксперту!</h1>
             <div className={s.buttons}>
               <Button variant={"primary"} size={'size_xl'} uppercase={'uppercase'}>
@@ -19,12 +17,8 @@ export default function MainPage() {
                 Заданные вопросы
               </Button>
             </div>
-          </div>
         </Container>
-      </div>
-      <div className={s.categories_container}>
         <CategoryList />
-      </div>
     </div>
   )
 }

@@ -1,8 +1,5 @@
-.content {
-    
-    margin: 0 auto;
-}
-.category_list{
+.category_list {
     display: flex;
     gap: 20px;
+    background-color: var(--bg-color);
 }
