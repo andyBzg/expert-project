@@ -1,0 +1,40 @@
+/* Общие стили для футера */
+.footer {
+    background-color: #3fb0ac;
+    color: #dddfd4;
+    padding: 20px 0;
+    text-align: center;
+    display: flex;
+  }
+  
+  /* Стили для логотипа */
+  .logo img {
+    margin: 10px;
+    max-width: 72px;
+    height: auto;
+  }
+  
+  /* Стили для списка ссылок */
+  .links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .links li {
+    margin: 0 10px;
+  }
+  
+  /* Стили для ссылок */
+  .links a {
+    text-decoration: none;
+    color: #dddfd4;
+    font-weight: bold;
+  }
+  
+  /* Стили для активных ссылок */
+  .links a.active {
+    color: #ff5722;
+  }
