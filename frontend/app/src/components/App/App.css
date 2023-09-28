@@ -1,5 +1,42 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+input,
+button,
+textarea,
+select {
+  margin: 0;
+  font: inherit;
+}
+
+:root {
+  /* fonts */
+  --font-family-main: Arial, Helvetica, sans-serif;
+  --font-size-m: 16px;
+  --font-line-m: 24px;
+  --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+  --font-size-l: 24px;
+  --font-line-l: 32px;
+  --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+  --font-size-xl: 32px;
+  --font-line-xl: 40px;
+  --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
+
+  /* colors */
+  --bg-color: #F5F5F5;
+  --primary-color: #2c5cf9;
+  --primary-color-1: #14134E;
+  --primary-color-2: #050515;
+  --secondary-color: #f4e360;
+  --secondary-color-1: #F7A93F;
+  --secondary-color-2: #FA6C20;
+
+  /* sizes */
+  --navbar-height: 70px;
+
+  /* borders */
+  --border-r-btn: 5px;
 }
