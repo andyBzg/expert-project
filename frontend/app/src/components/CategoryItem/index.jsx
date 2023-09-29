@@ -1,14 +1,15 @@
 import React from 'react';
 import s from './style.module.css'
-import icon from './atom.svg'
 import { Link } from 'react-router-dom'
 
-const CategoryItem = ({ img, title, link }) => {
+const CategoryItem = ({ icon, title, link }) => {
+
     return (
-        <Link to={`/expert/${link}`} className={s.item}>
+        <Link to={`/ask/${link}`} className={s.item}>
             <div className={s.category}>
-                <img className={s.icon} src={icon} alt={title} />
-                <h5 className={s.title}>{title}</h5>
+                <i class="las la-atom"></i> 
+                {/* icon will be chanched for each item */}
+                <h5 className={s.title}>{title} <span></span></h5>
             </div>
         </Link>
     );

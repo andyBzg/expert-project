@@ -1,5 +1,10 @@
 .category_list {
     display: flex;
-    gap: 20px;
+    justify-content: space-evenly;
+    max-width: 940px;
+    margin: 0 auto;
+}
+.container {
     background-color: var(--bg-color);
+    border-bottom: 1px solid #e7e7e7;
 }
