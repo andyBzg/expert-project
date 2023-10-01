@@ -8,6 +8,7 @@
     padding: 16px 5px;
     gap: 5px;
     color: var(--font-color-secondary);
+    transition: all 0.7s ease;
 }
 .title {
     text-align: center;
@@ -19,6 +20,7 @@
     border: 5px solid transparent;
     border-top: 6px solid var(--font-color-secondary);
     border-bottom: 0 none;
+    transition: all 0.5s ease;
 }
 .category i {
     font-size: 64px;
@@ -26,9 +28,7 @@
 .category:hover {
     background: #fff;
     color: var(--primary-color-1);
-    transition: all 0.7s;
 }
 .category:hover span {
     border-top: 6px solid var(--primary-color-1);
-    transition: all 0.7s;
 }

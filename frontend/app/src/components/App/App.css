@@ -2,7 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 input,
@@ -19,7 +19,7 @@ a {
 
 :root {
   /* fonts */
-  --font-family-main: Arial, Helvetica, sans-serif;
+  --font-family-main: 'Poppins', sans-serif;
   --font-size-m: 16px;
   --font-line-m: 24px;
   --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
