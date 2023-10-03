@@ -1,30 +1,29 @@
 package com.example.expertprojectbackend.registration.service.impl;
 
+import com.example.expertprojectbackend.client.entity.Client;
 import com.example.expertprojectbackend.registration.dto.RegistrationDto;
+import com.example.expertprojectbackend.registration.service.VerificationTokenService;
 import com.example.expertprojectbackend.registration.token.VerificationToken;
 import com.example.expertprojectbackend.registration.event.UserRegistrationEvent;
-import com.example.expertprojectbackend.registration.repository.VerificationTokenRepository;
 import com.example.expertprojectbackend.client.service.database.ClientDatabaseService;
 import com.example.expertprojectbackend.registration.service.RegistrationService;
+import com.example.expertprojectbackend.shared.exception.PasswordMismatchException;
 import com.example.expertprojectbackend.shared.exception.TokenNotFoundException;
-import com.example.expertprojectbackend.shared.security.database.User;
-import com.example.expertprojectbackend.shared.security.database.UserAuthority;
+import com.example.expertprojectbackend.security.database.User;
 import com.example.expertprojectbackend.shared.exception.UserAlreadyExistsException;
-import com.example.expertprojectbackend.shared.security.roles.Role;
-import com.example.expertprojectbackend.shared.security.service.CredentialsService;
-import com.example.expertprojectbackend.shared.service.EmailService;
+import com.example.expertprojectbackend.security.roles.Role;
+import com.example.expertprojectbackend.security.service.UserService;
+import com.example.expertprojectbackend.shared.email.EmailService;
+import com.example.expertprojectbackend.shared.exception.UserAlreadyVerifiedException;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -32,41 +31,38 @@ import java.util.UUID;
 @Slf4j
 public class RegistrationServiceImpl implements RegistrationService {
 
-    private final JdbcUserDetailsManager userDetailsManager;
-    private final CredentialsService credentialsService;
+    private final UserService userService;
     private final ClientDatabaseService clientDatabaseService;
-    private final VerificationTokenRepository tokenRepository;
+    private final VerificationTokenService verificationTokenService;
     private final ApplicationEventPublisher eventPublisher;
     private final EmailService emailService;
 
-    private static final String ROLE_PREFIX = "ROLE_";
 
     @Override
     @Transactional
     public void registerNewUser(RegistrationDto registrationDto, HttpServletRequest request) {
-        String email = registrationDto.getEmail();
-        String password = registrationDto.getPassword();
+        String email = registrationDto.email();
+        String password = registrationDto.password();
+        String passwordConfirmation = registrationDto.passwordConfirmation();
         String applicationUrl = getApplicationUrl(request);
 
-        if (userDetailsManager.userExists(email)) {
+        if (!password.equals(passwordConfirmation)) {
+            throw new PasswordMismatchException("Password mismatch");
+        }
+
+        if (userService.userExists(email)) {
             throw new UserAlreadyExistsException("Unable to register username, already exists in DB");
         }
 
-        credentialsService.registerCredentials(email, password);
+        userService.registerCredentials(email, password);
         publishRegistrationEvent(registrationDto, applicationUrl);
         log.info("New user successfully registered and waiting for email verification");
     }
 
     private void publishRegistrationEvent(RegistrationDto registrationDto, String applicationUrl) {
         User user = new User();
-        user.setUsername(registrationDto.getEmail());
+        user.setUsername(registrationDto.email());
         eventPublisher.publishEvent(new UserRegistrationEvent(user, applicationUrl));
-    }
-
-    @Override
-    public void saveVerificationToken(String token, User user) {
-        VerificationToken verificationToken = new VerificationToken(token, user);
-        tokenRepository.save(verificationToken);
     }
 
     @Override
@@ -75,28 +71,47 @@ public class RegistrationServiceImpl implements RegistrationService {
         if (token == null || StringUtils.isEmpty(token)) {
             throw new IllegalArgumentException("Parameter cannot be null or empty");
         }
-        VerificationToken verificationToken = tokenRepository.findByToken(token)
-                .orElseThrow(() -> new TokenNotFoundException("Token not found"));
 
-        if (verificationToken.getUser().isEnabled()) {
-            log.info("This account is already verified");
-        } else {
-            validateToken(verificationToken);
-            enableUser(verificationToken);
+        VerificationToken verificationToken = verificationTokenService.findByToken(token);
+        String username = verificationToken.getUsername();
+        User user = userService.findByUsername(username);
+
+        if (user.isEnabled()) {
+            throw new UserAlreadyVerifiedException("This account is already verified");
         }
+
+        validateVerificationToken(verificationToken);
+        completeUserRegistration(user);
+        verificationTokenService.deleteTokenFromDatabase(verificationToken);
+        log.info("User successfully verified with username {}", username);
+    }
+
+    private void validateVerificationToken(VerificationToken verificationToken) {
+        if (!verificationTokenService.validateToken(verificationToken)) {
+            verificationTokenService.deleteTokenFromDatabase(verificationToken);
+            userService.deleteUser(verificationToken.getUsername());
+            throw new TokenNotFoundException("Token has expired");
+        }
+    }
+
+    private void completeUserRegistration(User user) {
+        userService.enableUserWithRole(user, Role.CLIENT);
+
+        Client client = new Client();
+        client.setEmail(user.getUsername());
+        clientDatabaseService.saveClientToDatabase(client);
     }
 
     @Override
     @Transactional
     public void resendVerificationToken(String email, HttpServletRequest request) {
-        VerificationToken verificationToken = tokenRepository.findByUsername(email)
-                .orElseThrow(() -> new TokenNotFoundException("Token not found"));
-        Instant expirationTime = verificationToken.calculateTokenExpirationTime();
+        VerificationToken verificationToken = verificationTokenService.findByUsername(email);
+        Instant expirationTime = verificationTokenService.calculateTokenExpirationTime();
 
         verificationToken.setToken(UUID.randomUUID().toString());
         verificationToken.setExpirationTime(expirationTime);
 
-        tokenRepository.save(verificationToken);
+        verificationTokenService.saveTokenToDatabase(verificationToken);
         log.info("Verification token refreshed");
         resendConfirmationEmail(email, getApplicationUrl(request), verificationToken);
     }
@@ -105,43 +120,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         String token = verificationToken.getToken();
         String url = applicationUrl + "/api/register/verifyEmail?token=" + token;
         emailService.sendRegistrationConfirmationEmail(email, url);
-    }
-
-    private void enableUser(VerificationToken verificationToken) {
-        User user = verificationToken.getUser();
-        String username = user.getUsername();
-
-        if (userDetailsManager.userExists(username)) {
-            User updatedUser = new User();
-            updatedUser.setUsername(user.getUsername());
-            updatedUser.setPassword(user.getPassword());
-            updatedUser.setEnabled(true);
-
-            UserAuthority authority = new UserAuthority();
-            authority.setAuthority(ROLE_PREFIX + Role.CLIENT.name());
-            authority.setUser(user);
-
-            Set<UserAuthority> authorities = new HashSet<>();
-            authorities.add(authority);
-
-            updatedUser.setAuthorities(authorities);
-
-            userDetailsManager.updateUser(updatedUser);
-            log.info("Enabling user");
-            clientDatabaseService.saveClientToDatabase(updatedUser);
-            tokenRepository.delete(verificationToken);
-        }
-    }
-
-    private void validateToken(VerificationToken verificationToken) {
-        User user = verificationToken.getUser();
-        String username = user.getUsername();
-
-        if (verificationToken.getExpirationTime().isBefore(Instant.now())) {
-            tokenRepository.delete(verificationToken);
-            credentialsService.deleteUser(username);
-            throw new TokenNotFoundException("Token has expired");
-        }
     }
 
     public String getApplicationUrl(HttpServletRequest request) {
