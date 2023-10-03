@@ -7,12 +7,14 @@ import com.example.expertprojectbackend.registration.token.VerificationToken;
 import com.example.expertprojectbackend.registration.event.UserRegistrationEvent;
 import com.example.expertprojectbackend.client.service.database.ClientDatabaseService;
 import com.example.expertprojectbackend.registration.service.RegistrationService;
+import com.example.expertprojectbackend.shared.exception.PasswordMismatchException;
 import com.example.expertprojectbackend.shared.exception.TokenNotFoundException;
 import com.example.expertprojectbackend.security.database.User;
 import com.example.expertprojectbackend.shared.exception.UserAlreadyExistsException;
 import com.example.expertprojectbackend.security.roles.Role;
 import com.example.expertprojectbackend.security.service.UserService;
 import com.example.expertprojectbackend.shared.email.EmailService;
+import com.example.expertprojectbackend.shared.exception.UserAlreadyVerifiedException;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +43,12 @@ public class RegistrationServiceImpl implements RegistrationService {
     public void registerNewUser(RegistrationDto registrationDto, HttpServletRequest request) {
         String email = registrationDto.email();
         String password = registrationDto.password();
+        String passwordConfirmation = registrationDto.passwordConfirmation();
         String applicationUrl = getApplicationUrl(request);
+
+        if (!password.equals(passwordConfirmation)) {
+            throw new PasswordMismatchException("Password mismatch");
+        }
 
         if (userService.userExists(email)) {
             throw new UserAlreadyExistsException("Unable to register username, already exists in DB");
@@ -70,12 +77,29 @@ public class RegistrationServiceImpl implements RegistrationService {
         User user = userService.findByUsername(username);
 
         if (user.isEnabled()) {
-            log.info("This account is already verified");
-        } else {
-            validateVerificationToken(verificationToken);
-            completeUserRegistration(user);
-            verificationTokenService.deleteTokenFromDatabase(verificationToken);
+            throw new UserAlreadyVerifiedException("This account is already verified");
         }
+
+        validateVerificationToken(verificationToken);
+        completeUserRegistration(user);
+        verificationTokenService.deleteTokenFromDatabase(verificationToken);
+        log.info("User successfully verified with username {}", username);
+    }
+
+    private void validateVerificationToken(VerificationToken verificationToken) {
+        if (!verificationTokenService.validateToken(verificationToken)) {
+            verificationTokenService.deleteTokenFromDatabase(verificationToken);
+            userService.deleteUser(verificationToken.getUsername());
+            throw new TokenNotFoundException("Token has expired");
+        }
+    }
+
+    private void completeUserRegistration(User user) {
+        userService.enableUserWithRole(user, Role.CLIENT);
+
+        Client client = new Client();
+        client.setEmail(user.getUsername());
+        clientDatabaseService.saveClientToDatabase(client);
     }
 
     @Override
@@ -96,22 +120,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         String token = verificationToken.getToken();
         String url = applicationUrl + "/api/register/verifyEmail?token=" + token;
         emailService.sendRegistrationConfirmationEmail(email, url);
-    }
-
-    private void completeUserRegistration(User user) {
-        userService.enableUserWithRole(user, Role.CLIENT);
-
-        Client client = new Client();
-        client.setEmail(user.getUsername());
-        clientDatabaseService.saveClientToDatabase(client);
-    }
-
-    private void validateVerificationToken(VerificationToken verificationToken) {
-        if (!verificationTokenService.validateToken(verificationToken)) {
-            verificationTokenService.deleteTokenFromDatabase(verificationToken);
-            userService.deleteUser(verificationToken.getUsername());
-            throw new TokenNotFoundException("Token has expired");
-        }
     }
 
     public String getApplicationUrl(HttpServletRequest request) {

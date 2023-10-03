@@ -34,7 +34,8 @@ class RegistrationControllerTest {
         // Given
         String email = "test@mail.com";
         String password = "password";
-        RegistrationDto registrationDto = new RegistrationDto(email, password);
+        String passwordConfirmation = "password";
+        RegistrationDto registrationDto = new RegistrationDto(email, password, passwordConfirmation);
 
         // When
         ResponseEntity<RegistrationDto> actual = registrationController.registerNewUser(registrationDto, request);

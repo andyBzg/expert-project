@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
 
-    void registerCredentials(String email, String encodedPassword);
+    void registerCredentials(String email, String password);
 
     void enableUserWithRole(User user, Role role);
 
