@@ -106,3 +106,14 @@
     color: var(--font-color-main);
     line-height: 1;
 }
+
+.experts_count{
+    display: block;
+    font-size: 40px;
+    font-weight: 300;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: -0.8px;
+    padding: 40px 0;
+    color: var(--primary-color)
+}

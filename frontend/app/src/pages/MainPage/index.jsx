@@ -74,6 +74,11 @@ export default function MainPage() {
           </div>
         </div>
       </Container>
+      <Container className={s.experts_container}>
+        <span className={s.experts_count}>
+          сейчас на сайте <strong>80</strong> экспертов
+        </span>
+      </Container>
     </div>
   )
 }
