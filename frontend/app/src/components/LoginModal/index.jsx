@@ -39,7 +39,6 @@ function LoginModal() {
               
               <button type="submit" className={s.btn}>ВОЙТИ</button>
             </form>
-            <div>Уже зарегистрированы? <a href="login" className={s.link}>Войти</a></div>
           </div>
         </div>
       );
