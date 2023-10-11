@@ -8,7 +8,7 @@ export const fetchExperts = createAsyncThunk('experts/fetchExperts', async () =>
   return data;
 });
 
-// Добавьте обработку данных и состояния экшена в ваш slice
+
 const expertSlice = createSlice({
   name: 'experts',
   initialState: {
