@@ -28,6 +28,7 @@ public class WebSecurityConfig {
 
                     auth.requestMatchers("/api/register/**").permitAll();
                     auth.requestMatchers("/api/password-reset/**").permitAll();
+                    auth.requestMatchers("categories/all").permitAll();
 
                     /* these endpoints only for testing purposes */
                     auth.requestMatchers("/api/test/home").authenticated();
