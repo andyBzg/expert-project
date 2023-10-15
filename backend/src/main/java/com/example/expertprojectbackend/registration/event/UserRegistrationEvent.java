@@ -1,6 +1,6 @@
 package com.example.expertprojectbackend.registration.event;
 
-import com.example.expertprojectbackend.shared.security.database.User;
+import com.example.expertprojectbackend.security.database.User;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 

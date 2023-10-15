@@ -3,7 +3,7 @@ package com.example.expertprojectbackend.expert.service.event_listener;
 import com.example.expertprojectbackend.expert.entity.Expert;
 import com.example.expertprojectbackend.expert.event.ExpertRegistrationEvent;
 import com.example.expertprojectbackend.expert.service.database.ExpertService;
-import com.example.expertprojectbackend.shared.service.EmailService;
+import com.example.expertprojectbackend.shared.email.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
