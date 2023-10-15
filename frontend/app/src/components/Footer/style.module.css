@@ -1,68 +1,71 @@
-/* Общие стили для футера */
+/* Стили для футтера */
 .footer {
-    /* background-image: linear-gradient(to right, blue, grey, blue); */
-    background-color:var(--primary-color); 
-    color: #dddfd4;
-    padding: 20px 0;
-    text-align: center;
-    display: flex;
-  }
-  
-  /* Стили для логотипа */
-  .logo img {
-    margin-left: 50px;
-    width: 100px;
-    height: auto;
-  }
-  
-  /* Стили для списка ссылок */
-  .links {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    white-space: nowrap;
-    flex-wrap: wrap;
-  }
-  
-  .links li {
-    margin: 0 10px;
-  }
-  
-  /* Стили для ссылок */
-  .links a {
-    text-decoration: none;
-    color: #dddfd4;
-    font-weight: bold;
-  }
-  
-  /* Стили для активных ссылок */
-  .links a.active {
-    color: #ff5722;
-  }
+  position: relative;
+  bottom: 0;
+  background-color: var(--primary-color);
+  color: #dddfd4;
+  padding: 20px 0;
+  text-align: center;
+  display: flex;
+  max-width: 1440px;
+}
 
-  .links a{
-    background: none;
-    font: inherit;
-    line-height: 1;
-    margin: 0.5em;
-    cursor: pointer;
-    color: #dddfd4;
-  }
-  .links a{  
-    
-    transition: 0.25s;
-    
-    &:hover,
-    &:focus { 
-      border: 2px solid #fae596;
-      color: #fae596;
-    }
-  }
-  
-  .links a:hover,
-  .links a:focus {
+/* Стили для логотипа */
+.logo img {
+  margin-left: 50px;
+  width: 100px;
+  height: auto;
+}
+
+/* Стили для списка ссылок */
+.links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+  flex-wrap: wrap;
+}
+
+.links li {
+  margin: 0 10px;
+}
+
+/* Стили для ссылок */
+.links a {
+  text-decoration: none;
+  color: #dddfd4;
+  font-weight: bold;
+}
+
+/* Стили для активных ссылок */
+.links a.active {
+  color: #ff5722;
+}
+
+.links a {
+  background: none;
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  cursor: pointer;
+  color: #dddfd4;
+}
+
+.links a {
+  transition: 0.25s;
+}
+
+.links a:hover,
+.links a:focus {
+  border: 2px solid #fae596;
+  color: #fae596;
+}
+
+.links a:hover,
+.links a:focus {
   box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
   transform: translateY(-0.25em);
 }
+
