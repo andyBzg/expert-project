@@ -1,49 +1,55 @@
+
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: url('../../media/bg.png') no-repeat;
+    background-size: 100% 100%;
 }
 
 input,
 button,
 textarea,
 select {
-  margin: 0;
-  font: inherit;
+    margin: 0;
+    font: inherit;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 :root {
-  /* fonts */
-  --font-family-main: 'Poppins', sans-serif;
-  --font-size-m: 16px;
-  --font-line-m: 24px;
-  --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
-  --font-size-l: 24px;
-  --font-line-l: 32px;
-  --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
-  --font-size-xl: 32px;
-  --font-line-xl: 40px;
-  --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
+    /* fonts */
+    --font-family-main: 'Montserrat', sans-serif;
+    --font-size-m: 16px;
+    --font-line-m: 24px;
+    --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+    --font-size-l: 24px;
+    --font-line-l: 32px;
+    --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+    --font-size-xl: 32px;
+    --font-line-xl: 40px;
+    --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
 
-  /* colors */
-  --bg-color: #f5f5f5;
-  --font-color-main: #363636;
-  --font-color-secondary: #9f9f9f;
-  --primary-color: #2c5cf9;
-  --primary-color-1: #14134e;
-  --primary-color-2: #050515;
-  --secondary-color: #f4e360;
-  --secondary-color-1: #f7a93f;
-  --secondary-color-2: #fa6c20;
+    /* colors */
+    --bg-color: #f5f5f5;
+    --font-color-main: #363636;
+    --font-color-secondary: #deaf8f;
+    --primary-color: #2c5cf9;
+    --primary-color-1: #14134e;
+    --primary-color-2: #1E1E1E;
+    --secondary-color: #f4e360;
+    --secondary-color-1: #f7a93f;
+    --secondary-color-2: #fa6c20;
 
-  /* sizes */
-  --navbar-height: 70px;
+    /* sizes */
+    --navbar-height: 70px;
 
-  /* borders */
-  --border-r-btn: 5px;
+    /* borders */
+    --border-r-btn: 5px;
 }
