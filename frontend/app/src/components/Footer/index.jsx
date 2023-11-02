@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import s from './style.module.css';
 import Container from '../UI/Container';
-import logo from "../../media/23-removebg-preview.png";
+import logo from "../../media/Ask_logo_text.png";
 
 function Footer() {
   const footerLinks = useSelector((state) => state.footer.links);
