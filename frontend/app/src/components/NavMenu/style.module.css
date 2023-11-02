@@ -1,13 +1,35 @@
-.logo img{
-    height: 100px;
-    width: 100px;
+.logo{
+  display: flex;
+}
+.logo_image{
+    height:72px;
+    width: 44px;
     margin-left: 50px;
+}
+.logo_text{
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  
+}
+.logo_text img{
+  width: 84px;
+}
+.logo p{
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--primary-color);
+
 }
 .container{
     display:flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--primary-color);
+    background-color: var(--bg-color);
 }
 
 .registration_login{
@@ -19,13 +41,14 @@
 }
 .btn {
     background: none;
-    border: 2px solid #dddfd4;
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
     font: inherit;
     line-height: 1;
     margin: 0.5em;
     padding: 1em 2em;
     cursor: pointer;
-    color: #dddfd4;
+    color: var(--primary-color);
   }
   .btn {  
     
