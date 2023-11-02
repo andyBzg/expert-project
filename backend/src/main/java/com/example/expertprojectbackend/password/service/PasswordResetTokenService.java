@@ -8,4 +8,8 @@ public interface PasswordResetTokenService {
     PasswordResetToken findByToken(String token);
 
     boolean validateToken(PasswordResetToken resetToken);
+
+    void saveToken(PasswordResetToken token);
+
+    void deleteRevokedTokens();
 }

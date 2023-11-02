@@ -1,4 +1,4 @@
-package com.example.expertprojectbackend.password.token;
+package com.example.expertprojectbackend.email_verification.token;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,8 +12,8 @@ import java.time.Instant;
 
 @Data
 @Entity
-@Table(name = "password_reset_tokens")
-public class PasswordResetToken {
+@Table(name = "verification_tokens")
+public class VerificationToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

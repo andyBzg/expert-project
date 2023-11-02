@@ -1,13 +1,13 @@
 package com.example.expertprojectbackend.password.service.impl;
 
-import com.example.expertprojectbackend.password.dto.PasswordResetDto;
+import com.example.expertprojectbackend.password.dto.ResetPasswordDto;
 import com.example.expertprojectbackend.password.service.PasswordResetService;
 import com.example.expertprojectbackend.password.token.PasswordResetToken;
-import com.example.expertprojectbackend.security.database.User;
+import com.example.expertprojectbackend.security.user.User;
 import com.example.expertprojectbackend.security.service.UserService;
 import com.example.expertprojectbackend.shared.exception.InvalidTokenException;
 import com.example.expertprojectbackend.shared.exception.PasswordMismatchException;
-import com.example.expertprojectbackend.password.dto.PasswordResetRequestDto;
+import com.example.expertprojectbackend.password.dto.ResetPasswordRequest;
 import com.example.expertprojectbackend.password.service.PasswordResetTokenService;
 import com.example.expertprojectbackend.shared.email.EmailService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,8 +29,8 @@ public class PasswordResetServiceImpl implements PasswordResetService {
 
 
     @Override
-    public void requestPasswordReset(PasswordResetRequestDto resetRequestDto, HttpServletRequest request) {
-        String email = resetRequestDto.email();
+    public void requestPasswordReset(ResetPasswordRequest resetPasswordRequest, HttpServletRequest request) {
+        String email = resetPasswordRequest.email();
         if (!userService.userExists(email)) {
             throw new UsernameNotFoundException("User not found with username: " + email);
         }
@@ -55,19 +55,21 @@ public class PasswordResetServiceImpl implements PasswordResetService {
     }
 
     @Override
-    public void resetPassword(String token, PasswordResetDto passwordResetDto) {
+    public void resetPassword(String token, ResetPasswordDto resetPasswordDto) {
         validateResetToken(token);
 
-        String password = passwordResetDto.password();
-        String passwordConfirmation = passwordResetDto.passwordConfirmation();
+        String password = resetPasswordDto.password();
+        String passwordConfirmation = resetPasswordDto.confirmationPassword();
 
         if (!password.equals(passwordConfirmation)) {
             throw new PasswordMismatchException("Incorrect password confirmation");
         }
 
         PasswordResetToken resetToken = passwordResetTokenService.findByToken(token);
-        String username = resetToken.getUsername();
+        resetToken.setRevoked(true);
+        passwordResetTokenService.saveToken(resetToken);
 
+        String username = resetToken.getUsername();
         userService.changePassword(username, password);
         log.info("Password changed for user {}", username);
     }
@@ -77,7 +79,7 @@ public class PasswordResetServiceImpl implements PasswordResetService {
     }
 
     public void sendPasswordResetEmail(String applicationUrl, String userEmail, String token) {
-        String resetUrl = applicationUrl + "/api/password-reset/reset?token=" + token;
+        String resetUrl = applicationUrl + "/api/v1/password-reset/reset?token=" + token;
         emailService.sendPasswordResetEmail(userEmail, resetUrl);
     }
 }

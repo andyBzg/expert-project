@@ -22,7 +22,7 @@ services:
   mysql:
     image: mysql:latest
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - pj-expert-network
     environment:

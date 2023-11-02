@@ -1,7 +1,7 @@
 package com.example.expertprojectbackend.password.controller;
 
-import com.example.expertprojectbackend.password.dto.PasswordResetDto;
-import com.example.expertprojectbackend.password.dto.PasswordResetRequestDto;
+import com.example.expertprojectbackend.password.dto.ResetPasswordDto;
+import com.example.expertprojectbackend.password.dto.ResetPasswordRequest;
 import com.example.expertprojectbackend.password.service.PasswordResetService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/password-reset")
+@RequestMapping("/api/v1/password-reset")
 @RequiredArgsConstructor
 @Slf4j
 public class PasswordResetController {
@@ -24,7 +24,7 @@ public class PasswordResetController {
 
     @PostMapping("/request")
     public ResponseEntity<String> requestPasswordReset(
-            @RequestBody PasswordResetRequestDto resetRequestDto, final HttpServletRequest request) {
+            @RequestBody ResetPasswordRequest resetRequestDto, final HttpServletRequest request) {
         log.info("Request password reset");
         passwordResetService.requestPasswordReset(resetRequestDto, request);
         return ResponseEntity.ok().build();
@@ -39,9 +39,9 @@ public class PasswordResetController {
 
     @PostMapping("/reset")
     public ResponseEntity<String> resetPassword(
-            @RequestParam("token") String token, @RequestBody PasswordResetDto passwordResetDto) {
+            @RequestParam("token") String token, @RequestBody ResetPasswordDto resetPasswordDto) {
         log.info("Resetting password");
-        passwordResetService.resetPassword(token, passwordResetDto);
+        passwordResetService.resetPassword(token, resetPasswordDto);
         return ResponseEntity.ok().build();
     }
 }
