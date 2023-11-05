@@ -39,11 +39,17 @@
     border: 2px solid var(--secondary-color-3);
 }
 
-.expert__img {
+.expert__img img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: black;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+.expert__img {
+    width: 150px;
+    height: 150px;
 }
 
 .expert__name {

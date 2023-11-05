@@ -18,7 +18,7 @@ const expertSlice = createSlice({
                 rating: 5,
                 firstName: 'Bob',
                 description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
-                photo: 'image2.png',
+                photo: 'image1.jpg',
                 url: '#!',
                 online: true
             },

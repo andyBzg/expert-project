@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import s from './style.module.css'
-import {Swiper, SwiperSlide} from "swiper/react";
 import ReactStars from "react-rating-stars-component/dist/react-stars";
 
 
