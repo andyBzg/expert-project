@@ -49,5 +49,6 @@
     bottom: 0;
     left: 0;
     opacity: 0.8;
-    background: linear-gradient(360deg, var(--primary-color-2) 0%, rgba(30, 30, 30, 0) 62%);
+    background: linear-gradient(360deg, #1E1E1E 0%, rgba(30, 30, 30, 0) 62%);
+
 }

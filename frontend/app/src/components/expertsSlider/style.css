@@ -1,0 +1,60 @@
+.slider {
+    width: 100%;
+    position: relative;;
+}
+
+.slider__container {
+    width: 1260px;
+    margin: 0 auto 150px auto;
+}
+
+.swiper {
+    position: unset !important;
+}
+
+.swiper-button-prev:before, .swiper-button-next:before {
+    content: '';
+    display: block;
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.swiper-button-next:before {
+    background: url("../../media/arrow-right.png") no-repeat;
+}
+
+.swiper-button-prev:before {
+    background: url("../../media/arrow-left.png") no-repeat;
+}
+
+.swiper-button-prev {
+    position: relative;
+    left: 0;
+    margin: 5px;
+}
+
+.swiper-button-next, .swiper-rtl {
+    right: 0;
+    margin: 5px;
+
+}
+
+.swiper-button-prev, .swiper-button-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+    cursor: pointer;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    color: var(--secondary-color-3);
+    background: var(--secondary-color-3);
+    border-radius: 50%;
+}

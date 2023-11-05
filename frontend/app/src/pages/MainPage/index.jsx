@@ -7,6 +7,7 @@ import {reasons} from '../../store/content_data/mainPage.js'
 import ReactPlayer from 'react-player'
 import {Link} from 'react-router-dom'
 import PopCategoryList from "../../components/popCategoryList/popCategoryList";
+import ExpertSlider from "../../components/expertsSlider/expertSlider";
 
 export default function MainPage() {
     return (
@@ -24,6 +25,9 @@ export default function MainPage() {
             </Container>
             <CategoryList/>
             <PopCategoryList/>
+            <Container>
+                <ExpertSlider/>
+            </Container>
             <Container className={s.container}>
                 <div className={s.content_container}>
                     <h2 className={s.subtitle}>Как мы работаем</h2>
