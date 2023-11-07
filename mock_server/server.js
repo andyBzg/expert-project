@@ -10,17 +10,66 @@ app.use(bodyParser.json());
 
 
 const experts = [
-  { id: 1, firstName: 'Иван Петров', country: 'Россия' },
-  { id: 2, firstName: 'Елена Сидорова', country: 'Украина' },
-  { id: 3, firstName: 'Василий Сергеевич', country: 'Германия'},
+
+    {
+        id: 1,
+        rating: 5,
+        firstName: 'Иван Петров',
+        description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
+        photoURL: 'image1.jpg',
+        country: 'Германия',
+        url: '#!',
+        online: true
+    },
+    {
+        id: 2,
+        rating: 4.5,
+        firstName: 'Елена Сидорова',
+        description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
+        photo: 'image3.png',
+        country: 'Бельгия',
+        url: '#!',
+        online: true
+    },
+    {
+        id: 3,
+        rating: 3,
+        firstName: 'Василий Петров',
+        description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
+        photo: 'image.png',
+        country: 'Швейцария',
+        url: '#!',
+        online: false
+    },
+    {
+        id: 4,
+        rating: 4,
+        firstName: 'Kim',
+        description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
+        photo: 'image4.png',
+        country: 'Австрия',
+        url: '#!',
+        online: false
+    },
+    {
+        id: 2,
+        rating: 4.5,
+        firstName: 'Anna',
+        description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
+        photo: 'image3.png',
+        country: 'Германия',
+        url: '#!',
+        online: true
+    },
 ];
+
 
 // Роут для получения списка экспертов
 app.get('/experts', (req, res) => {
-  res.json(experts);
+    res.json(experts);
 });
 
 // Запуск сервера
 app.listen(port, () => {
-  console.log(`Сервер запущен на порту ${port}`);
+    console.log(`Сервер запущен на порту ${port}`);
 });

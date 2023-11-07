@@ -9,10 +9,10 @@ const ExpertSliderList = () => {
     const dispatch = useDispatch();
     const experts = useSelector((state) => state.experts.experts);
 
-    // useEffect(() => {
-    //     // Вызываем экшен fetchExperts, чтобы отправить запрос на сервер
-    //     dispatch(fetchExperts());
-    // }, [dispatch]);
+    useEffect(() => {
+        // Вызываем экшен fetchExperts, чтобы отправить запрос на сервер
+        dispatch(fetchExperts());
+    }, [dispatch]);
     return (
         <>
             <Swiper
