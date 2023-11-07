@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import s from './style.module.css'
-import ReactStars from "react-rating-stars-component/dist/react-stars";
+import ReactStars from "react-stars/dist/react-stars";
 
 
 const ExpertSliderItem = ({expert}) => {
