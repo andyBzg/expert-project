@@ -26,8 +26,8 @@ const ExpertSliderList = () => {
                 className="mySwiper"
             >
                 {
-                    experts.map((expert, index) =>
-                        <SwiperSlide key={index}>
+                    experts.map(expert =>
+                        <SwiperSlide key={expert.id}>
                             <ExpertSliderItem expert={expert}/>
                         </SwiperSlide>
                     )

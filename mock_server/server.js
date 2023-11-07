@@ -52,7 +52,7 @@ const experts = [
         online: false
     },
     {
-        id: 2,
+        id: 5,
         rating: 4.5,
         firstName: 'Anna',
         description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
