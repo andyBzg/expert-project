@@ -1,19 +1,18 @@
 import React, {useEffect} from 'react';
-import ExpertCard from "../../ExpertCard";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchExperts} from "../../../store/slices/expertSlice";
 import ExpertSliderItem from "../expertSliderItem/expertSliderItem";
-import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation} from "swiper/modules";
+import {Swiper, SwiperSlide} from "swiper/react";
 
 const ExpertSliderList = () => {
     const dispatch = useDispatch();
     const experts = useSelector((state) => state.experts.experts);
 
-    // useEffect(() => {
-    //     // Вызываем экшен fetchExperts, чтобы отправить запрос на сервер
-    //     dispatch(fetchExperts());
-    // }, [dispatch]);
+    useEffect(() => {
+        // Вызываем экшен fetchExperts, чтобы отправить запрос на сервер
+        dispatch(fetchExperts());
+    }, [dispatch]);
     return (
         <>
             <Swiper

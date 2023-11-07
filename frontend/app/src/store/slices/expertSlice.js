@@ -12,53 +12,7 @@ export const fetchExperts = createAsyncThunk('experts/fetchExperts', async () =>
 const expertSlice = createSlice({
     name: 'experts',
     initialState: {
-        experts: [
-            {
-                id: 1,
-                rating: 5,
-                firstName: 'Bob',
-                description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
-                photo: 'image1.jpg',
-                url: '#!',
-                online: true
-            },
-            {
-                id: 2,
-                rating: 4.5,
-                firstName: 'Anna',
-                description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
-                photo: 'image3.png',
-                url: '#!',
-                online: true
-            },
-            {
-                id: 3,
-                rating: 3,
-                firstName: 'John',
-                description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
-                photo: 'image.png',
-                url: '#!',
-                online: false
-            },
-            {
-                id: 4,
-                rating: 4,
-                firstName: 'Kim',
-                description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
-                photo: 'image4.png',
-                url: '#!',
-                online: false
-            },
-            {
-                id: 2,
-                rating: 4.5,
-                firstName: 'Anna',
-                description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
-                photo: 'image3.png',
-                url: '#!',
-                online: true
-            },
-        ], // В этом поле будет храниться список экспертов
+        experts: [], // В этом поле будет храниться список экспертов
         status: 'idle', // Статус запроса (idle, loading, succeeded, failed)
         error: null, // Ошибка, если запрос завершился с ошибкой
     },
