@@ -19,6 +19,7 @@ const ExpertSliderItem = ({expert}) => {
             </div>
             <div className={s.expert__name}>{expert.firstName}</div>
             <div className={s.expert__rating}>
+                {/*https://github.com/ertanhasani/react-stars*/}
                 <ReactStars
                     count={5}
                     size={30}
