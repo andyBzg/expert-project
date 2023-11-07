@@ -26,7 +26,7 @@ const experts = [
         rating: 4.5,
         firstName: 'Елена Сидорова',
         description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
-        photo: 'image3.png',
+        photoURL: 'image3.png',
         country: 'Бельгия',
         url: '#!',
         online: true
@@ -36,7 +36,7 @@ const experts = [
         rating: 3,
         firstName: 'Василий Петров',
         description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
-        photo: 'image.png',
+        photoURL: 'image.png',
         country: 'Швейцария',
         url: '#!',
         online: false
@@ -46,7 +46,7 @@ const experts = [
         rating: 4,
         firstName: 'Kim',
         description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
-        photo: 'image4.png',
+        photoURL: 'image4.png',
         country: 'Австрия',
         url: '#!',
         online: false
@@ -56,7 +56,7 @@ const experts = [
         rating: 4.5,
         firstName: 'Anna',
         description: 'Семейные, трудовые, любовные отношения, а также вопросы личностного развития.',
-        photo: 'image3.png',
+        photoURL: 'image3.png',
         country: 'Германия',
         url: '#!',
         online: true

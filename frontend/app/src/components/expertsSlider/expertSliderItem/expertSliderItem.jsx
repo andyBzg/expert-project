@@ -5,7 +5,7 @@ import ReactStars from "react-stars/dist/react-stars";
 
 
 const ExpertSliderItem = ({expert}) => {
-    const photoURL = require(`../../../media/expertsPhoto/${expert.photo}`)
+    const photoURL = require(`../../../media/expertsPhoto/${expert.photoURL}`)
     return (
 
         <div className={s.expert__card}>
