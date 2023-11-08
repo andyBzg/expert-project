@@ -26,7 +26,13 @@ export default function MainPage() {
             <CategoryList/>
             <PopCategoryList/>
             <Container>
-                <ExpertSlider/>
+                <ExpertSlider
+                    slidesPerView={3}
+                    spaceBetween={88}
+                    pagination={{clickable: false}}
+                    navigation={true}
+                    className={'expertSlider'}
+                />
             </Container>
             <Container className={s.container}>
                 <div className={s.content_container}>

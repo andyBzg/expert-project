@@ -3,11 +3,12 @@ import 'swiper/css';
 import "./style.css";
 import ExpertSliderList from "./expertSliderList/expertSliderList";
 
-const ExpertSlider = () => {
+const ExpertSlider = (config) => {
+
     return (
         <div className={`slider`}>
             <div className={`slider__container`}>
-                <ExpertSliderList/>
+                <ExpertSliderList {...config}/>
             </div>
         </div>
     );

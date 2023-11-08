@@ -5,7 +5,7 @@ import ExpertSliderItem from "../expertSliderItem/expertSliderItem";
 import {Navigation} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 
-const ExpertSliderList = () => {
+const ExpertSliderList = ({slidesPerView, spaceBetween, pagination, navigation, className}) => {
     const dispatch = useDispatch();
     const experts = useSelector((state) => state.experts.experts);
 
@@ -16,14 +16,12 @@ const ExpertSliderList = () => {
     return (
         <>
             <Swiper
-                slidesPerView={3}
-                spaceBetween={88}
-                pagination={{
-                    clickable: true,
-                }}
-                navigation={true}
+                slidesPerView={slidesPerView}
+                spaceBetween={spaceBetween}
+                pagination={pagination}
+                navigation={navigation}
                 modules={[Navigation]}
-                className="mySwiper"
+                className={className}
             >
                 {
                     experts.map(expert =>
