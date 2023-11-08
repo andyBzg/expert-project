@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<String> handleBadCredentialsException() {
         log.error("Incorrect credentials");
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @ExceptionHandler(DisabledException.class)

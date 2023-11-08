@@ -40,16 +40,25 @@ public class PasswordResetTokenServiceImpl implements PasswordResetTokenService 
 
     @Override
     public boolean validateToken(PasswordResetToken resetToken) {
-        return resetToken != null && !isTokenExpired(resetToken);
+        return resetToken != null && !resetToken.isRevoked() && !isTokenExpired(resetToken);
+    }
+
+    @Override
+    public void saveToken(PasswordResetToken token) {
+        passwordResetTokenRepository.save(token);
+    }
+
+    public void saveTokenToDatabase(PasswordResetToken passwordResetToken) {
+        passwordResetTokenRepository.save(passwordResetToken);
+    }
+
+    @Override
+    public void deleteRevokedTokens() {
+        passwordResetTokenRepository.deleteAllByRevokedTrue();
     }
 
     public boolean isTokenExpired(PasswordResetToken resetToken) {
         return resetToken.getExpirationTime().isBefore(Instant.now());
-    }
-
-
-    public void saveTokenToDatabase(PasswordResetToken passwordResetToken) {
-        passwordResetTokenRepository.save(passwordResetToken);
     }
 
     public String generateToken() {

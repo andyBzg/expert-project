@@ -1,15 +1,14 @@
 package com.example.expertprojectbackend.security.service;
 
-import com.example.expertprojectbackend.security.database.User;
-import com.example.expertprojectbackend.security.roles.Role;
+import com.example.expertprojectbackend.security.user.User;
 
 import java.util.List;
 
 public interface UserService {
 
-    void registerCredentials(String email, String password);
+    User registerCredentials(String username, String password);
 
-    void enableUserWithRole(User user, Role role);
+    void enableUser(User user);
 
     User findByUsername(String username);
 

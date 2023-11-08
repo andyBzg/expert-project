@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("categories")
+@RequestMapping("/api/v1/categories")
 @RequiredArgsConstructor
 @Slf4j
 public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<CategoriesDto> getAllCategories() {
         CategoriesDto categories = categoryService.getListOfCategories();
         return ResponseEntity.ok(categories);

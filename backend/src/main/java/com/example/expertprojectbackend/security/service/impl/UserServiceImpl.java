@@ -1,105 +1,90 @@
 package com.example.expertprojectbackend.security.service.impl;
 
-import com.example.expertprojectbackend.security.service.UserService;
-import com.example.expertprojectbackend.security.database.User;
-import com.example.expertprojectbackend.security.database.UserAuthority;
+import com.example.expertprojectbackend.security.user.User;
+import com.example.expertprojectbackend.security.user.UserAuthority;
+import com.example.expertprojectbackend.security.repository.UserAuthoritiesRepository;
+import com.example.expertprojectbackend.security.repository.UserRepository;
 import com.example.expertprojectbackend.security.roles.Role;
+import com.example.expertprojectbackend.security.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService {
 
-    private final JdbcUserDetailsManager userDetailsManager;
+    private final UserRepository userRepository;
+    private final UserAuthoritiesRepository userAuthoritiesRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Value("${authority.role.prefix}")
     private String rolePrefix;
 
+    @Value("${exception.user.not.found}")
+    private String exceptionMessage;
+
     @Override
-    public void registerCredentials(String email, String password) {
+    public User registerCredentials(String username, String password) {
         String encodedPassword = passwordEncoder.encode(password);
 
         User user = new User();
-        user.setUsername(email);
+        user.setUsername(username);
         user.setPassword(encodedPassword);
         user.setEnabled(false);
-        userDetailsManager.createUser(user);
-        log.info("Credentials registered");
-    }
-
-    @Override
-    public void enableUserWithRole(User user, Role role) {
-        if (!userDetailsManager.userExists(user.getUsername())) {
-            throw new UsernameNotFoundException("User not found with username " + user.getUsername());
-        }
-
-        User enabledUser = new User();
-        enabledUser.setUsername(user.getUsername());
-        enabledUser.setPassword(user.getPassword());
-        enabledUser.setEnabled(true);
 
         UserAuthority authority = new UserAuthority();
-        authority.setAuthority(rolePrefix + role);
+        authority.setAuthority(rolePrefix + Role.CLIENT);
         authority.setUser(user);
 
-        Set<UserAuthority> authorities = new HashSet<>();
-        authorities.add(authority);
-
-        enabledUser.setAuthorities(authorities);
-
-        userDetailsManager.updateUser(enabledUser);
-        log.info("Enabling user");
-    }
-
-    @Override
-    public User findByUsername(String username) {
-        if (!userDetailsManager.userExists(username)) {
-            throw new UsernameNotFoundException("User not found with username " + username);
-        }
-        UserDetails userDetails = userDetailsManager.loadUserByUsername(username);
-        User user = new User();
-        user.setUsername(userDetails.getUsername());
-        user.setPassword(userDetails.getPassword());
-        user.setEnabled(user.isEnabled());
+        userRepository.save(user);
+        userAuthoritiesRepository.save(authority);
+        log.info("Credentials registered");
         return user;
     }
 
     @Override
-    public void changePassword(String username, String newPassword) {
-        UserDetails userDetails = userDetailsManager.loadUserByUsername(username);
-        String storedPassword = userDetails.getPassword();
+    public void enableUser(User user) {
+        User existingUser = userRepository.findByUsername(user.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException(exceptionMessage));
+        existingUser.setEnabled(true);
+        userRepository.save(existingUser);
+        log.info("User enabled");
+    }
 
-        String encodedNewPassword = passwordEncoder.encode(newPassword);
-        userDetailsManager.changePassword(storedPassword, encodedNewPassword);
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(exceptionMessage));
+    }
+
+    @Override
+    public void changePassword(String username, String newPassword) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(exceptionMessage));
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 
     @Override
     public void deleteUser(String username) {
-        userDetailsManager.deleteUser(username);
+        userRepository.deleteUserByUsername(username);
     }
 
     @Override
     public void deleteUnverifiedUsers(List<String> usernames) {
-        for (String username : usernames) {
-            userDetailsManager.deleteUser(username);
-        }
+        usernames.forEach(userRepository::deleteUserByUsername);
     }
 
     @Override
     public boolean userExists(String username) {
-        return userDetailsManager.userExists(username);
+        return userRepository.findByUsername(username).isPresent();
     }
 }
