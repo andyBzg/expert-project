@@ -2,15 +2,13 @@ import React from 'react';
 import s from './style.module.css'
 import Container from "../UI/Container";
 import {solutionItem} from "../../store/content_data/mainPage.js";
-import solutionDecor from './../../media/solution-img.png'
 import solutionItemImg from './../../media/solution-stroke.png'
 
 
 const Solution = () => {
     return (
-        <div className={s.solution}>
+        <section className={s.solution}>
             <Container className={s.solution__container}>
-                {/*<div className={s.solution__wrapper}>*/}
                 <div className={s.solution__wrapper}>
                     <div className={s.solutionHeader}>
                         <div className={s.solutionHeader__title}><h2>Вирішення задачі</h2></div>
@@ -32,9 +30,8 @@ const Solution = () => {
                         }
                     </div>
                 </div>
-                {/*</div>*/}
             </Container>
-        </div>
+        </section>
     );
 };
 
