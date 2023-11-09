@@ -8,6 +8,7 @@ import ReactPlayer from 'react-player'
 import {Link} from 'react-router-dom'
 import PopCategoryList from "../../components/popCategoryList/popCategoryList";
 import ExpertSlider from "../../components/expertsSlider/expertSlider";
+import Solution from "../../components/Solution/Solution";
 
 export default function MainPage() {
     return (
@@ -25,6 +26,7 @@ export default function MainPage() {
             </Container>
             <CategoryList/>
             <PopCategoryList/>
+            <Solution/>
             <Container>
                 <ExpertSlider
                     slidesPerView={3}

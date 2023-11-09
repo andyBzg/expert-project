@@ -1,0 +1,110 @@
+.solution {
+    position: relative;
+    width: 100%;
+    min-height: 586px;
+    margin-bottom: 150px;
+    background: linear-gradient(304.29deg, #161453 -9.58%, #3433CD 58.68%);
+}
+
+.solution__container {
+    height: 586px;
+}
+
+.solution__wrapper {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    row-gap: 50px;
+}
+
+.solutionHeader {
+    width: 550px;
+}
+
+.solutionHeader__title h2 {
+    margin-bottom: 10px;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: -0.015em;
+    color: var(--secondary-color-2);
+    text-align: center;
+}
+
+.solutionHeader__subtitle {
+    font-size: var(--font-size-m);
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0;
+    color: var(--bg-color);
+    text-align: center;
+}
+
+.solutionBody {
+    height: 255px;
+    width: 100%;
+    display: flex;
+    gap: 278px;
+    justify-content: center;
+
+}
+
+.solutionItem {
+    position: relative;
+    height: 100%;
+    width: 235px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.solutionItem:nth-child(1):before {
+    content: '';
+    position: absolute;
+    left: 180px;
+    height: 200px;
+    width: 320px;
+    background: url('./../../media/solution-img.png') no-repeat;
+    transform: rotate(-150deg);
+    background-size: 320px 200px;
+}
+
+.solutionItem:nth-child(2):before {
+    content: '';
+    position: absolute;
+    left: 227px;
+    bottom: 90px;
+    height: 185px;
+    width: 290px;
+    background: url('./../../media/solution-img.png') no-repeat;
+    background-size: 290px 185px;
+    transform: rotate(340deg) scaleX(-1);
+
+}
+
+.solution__item-img {
+}
+
+.solution__itemTitle {
+    font-size: var(--font-size-l);
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: var(--secondary-color-2);
+
+}
+
+.solution__itemSubtitle {
+    max-width: 100%;
+    min-height: 45px;
+    font-size: var(--font-size-m);
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0;
+    color: var(--bg-color);
+    text-align: center;
+}
