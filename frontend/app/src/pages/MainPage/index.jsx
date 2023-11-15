@@ -29,6 +29,7 @@ export default function MainPage() {
             <Solution/>
             <Container>
                 <ExpertSlider
+                    slidesQuantity={8}
                     slidesPerView={3}
                     spaceBetween={88}
                     pagination={{clickable: false}}

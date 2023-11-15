@@ -5,10 +5,12 @@ import ExpertSliderItem from "../expertSliderItem/expertSliderItem";
 import {Navigation} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 
-const ExpertSliderList = ({slidesPerView, spaceBetween, pagination, navigation, className}) => {
+const ExpertSliderList = ({slidesQuantity, slidesPerView, spaceBetween, pagination, navigation, className}) => {
     const dispatch = useDispatch();
-    const experts = useSelector((state) => state.experts.experts);
-
+    const expertsArr = useSelector((state) => state.experts.experts);
+    const experts = expertsArr.slice()
+    experts.splice(slidesQuantity)
+    
     useEffect(() => {
         // Вызываем экшен fetchExperts, чтобы отправить запрос на сервер
         dispatch(fetchExperts());
@@ -28,11 +30,8 @@ const ExpertSliderList = ({slidesPerView, spaceBetween, pagination, navigation, 
                         <SwiperSlide key={expert.id}>
                             <ExpertSliderItem expert={expert}/>
                         </SwiperSlide>
-                    )
-                }
-
+                    )}
             </Swiper>
-
         </>
     );
 };
