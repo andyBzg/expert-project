@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom'
 import PopCategoryList from "../../components/popCategoryList/popCategoryList";
 import ExpertSlider from "../../components/expertsSlider/expertSlider";
 import Solution from "../../components/Solution/Solution";
+import InfoBlock from "../../components/InfoBlock/infoBlock";
 
 export default function MainPage() {
     return (
@@ -47,6 +48,8 @@ export default function MainPage() {
                     <ReactPlayer width={'750px'} height={'440px'} url="https://vimeo.com/417775951" controls/>
                 </Container>
             </section>
+            <InfoBlock/>
+
             <Container className={s.experts_container}>
         <span className={s.experts_count}>
           сейчас на сайте <strong>80</strong> экспертов

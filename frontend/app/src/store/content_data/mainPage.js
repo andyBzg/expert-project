@@ -10,3 +10,25 @@ export const solutionItem = [
     {title: 'Крок 2', subtitle: 'QDARFWGESH RDNJTG FMHGBV CXCVBNBHGFWS'},
     {title: 'Крок 3', subtitle: 'QDARFWGESHR DNJTG FMHGBV CXCVBNBHGFWS'},
 ]
+
+
+export const infoBlockData = [
+    {
+        title: 'Lorem ipsum dolor sit',
+        subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+        imgURL: 'rafiki.png',
+        url: '/ask/law'
+    },
+    {
+        title: 'Lorem ipsum dolor sit',
+        subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+        imgURL: 'rafiki2.png',
+        url: '/ask/law'
+    },
+    {
+        title: 'Lorem ipsum dolor sit',
+        subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+        imgURL: 'rafiki3.png',
+        url: '/ask/law'
+    },
+]
