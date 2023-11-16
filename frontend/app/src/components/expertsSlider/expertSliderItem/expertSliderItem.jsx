@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import s from './style.module.css'
 import ReactStars from "react-stars/dist/react-stars";
+import Button from "../../UI/Button";
 
 
 const ExpertSliderItem = ({expert}) => {
@@ -34,7 +35,14 @@ const ExpertSliderItem = ({expert}) => {
                 />
             </div>
             <div className={s.expert__descriptions}>{expert.description}</div>
-            <div className={s.expert__about}><Link to={'#'}>Читати більше</Link></div>
+            <Button
+                rounded={'rounded'}
+                uppercase={'uppercase'}
+                variant={'primary'}
+                size={'size_m'}
+                to={`#`}>
+                Читати більше</Button>
+            {/*<div className={s.expert__about}><Link to={'#'}>Читати більше</Link></div>*/}
         </div>
 
     );

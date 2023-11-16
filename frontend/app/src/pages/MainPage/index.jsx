@@ -9,6 +9,7 @@ import PopCategoryList from "../../components/popCategoryList/popCategoryList";
 import ExpertSlider from "../../components/expertsSlider/expertSlider";
 import Solution from "../../components/Solution/Solution";
 import InfoBlock from "../../components/InfoBlock/infoBlock";
+import MainReviews from "../../components/mainReviews/mainReviews";
 
 export default function MainPage() {
     return (
@@ -50,12 +51,8 @@ export default function MainPage() {
                 </Container>
             </section>
             <InfoBlock/>
-
-            <Container className={s.experts_container}>
-        <span className={s.experts_count}>
-          сейчас на сайте <strong>80</strong> экспертов
-        </span>
-            </Container>
+            <MainReviews/>
+            
         </div>
     )
 }

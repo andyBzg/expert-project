@@ -16,19 +16,37 @@ export const infoBlockData = [
     {
         title: 'Lorem ipsum dolor sit',
         subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-        imgURL: 'rafiki.png',
         url: '/ask/law'
     },
     {
         title: 'Lorem ipsum dolor sit',
         subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-        imgURL: 'rafiki2.png',
         url: '/ask/law'
     },
     {
         title: 'Lorem ipsum dolor sit',
         subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
-        imgURL: 'rafiki3.png',
         url: '/ask/law'
+    },
+]
+
+
+export const mainReviews = [
+    {
+        title: 'Олексій',
+        subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+        rating: 5,
+    },
+
+    {
+        title: 'Олександр',
+        subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+        rating: 4,
+    },
+
+    {
+        title: 'Ольга',
+        subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit',
+        rating: 5,
     },
 ]

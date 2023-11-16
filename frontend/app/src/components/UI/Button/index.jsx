@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import s from './style.module.css'
 
 // variant:
 // outlined
 // clear
-// primary, 
+// primary,
 // secondary,
 
 //rounded: rounded
@@ -13,24 +13,23 @@ import s from './style.module.css'
 //sizes: size_m, size_l, size_xl
 
 const Button = ({
-    children,
-    to,
-    variant,
-    size,
-    style,
-    width,
-    uppercase,
-    rounded,
-    ...otherProps
-}) => {
+                    children,
+                    to,
+                    variant,
+                    size,
+                    style,
+                    width,
+                    uppercase,
+                    rounded,
+                    ...otherProps
+                }) => {
     return (
         <Link to={to}>
             <button
                 {...otherProps}
                 className={
-                    [s.btn, s[variant], s[size], s[style], s[rounded], s[uppercase]].join(' ')
+                    [s.btn, s[variant], s[size], s[style], s[rounded], s[uppercase], s[width]].join(' ')
                 }
-                width={width}
             >
                 {children}
             </button>
