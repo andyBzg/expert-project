@@ -17,3 +17,11 @@
     grid-auto-rows: calc(625px / 2 - 25px);
     gap: 25px;
 }
+
+.popCategories__column3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.popCategories__column2 {
+    grid-template-columns: repeat(2, 1fr);
+}

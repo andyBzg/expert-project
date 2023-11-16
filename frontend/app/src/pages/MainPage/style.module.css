@@ -133,3 +133,9 @@
     padding: 40px 0;
     color: var(--primary-color)
 }
+
+.playerContainer {
+    background: url('./../../media/loader.webp') no-repeat center;
+    background-color: #E3EBF8;
+    background-size: 150px 150px;
+}

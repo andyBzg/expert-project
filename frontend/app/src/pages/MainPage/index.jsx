@@ -26,7 +26,7 @@ export default function MainPage() {
                 </div>
             </Container>
             <CategoryList/>
-            <PopCategoryList/>
+            <PopCategoryList popCategoriesColumn={3}/>
             <Solution/>
             <Container>
                 <ExpertSlider
@@ -47,12 +47,17 @@ export default function MainPage() {
                                                                 sedgfrhgnhjbvcxxdcfdvgbhnhmgnfdtgkrsjefawd
                         </div>
                     </div>
-                    <ReactPlayer width={'750px'} height={'440px'} url="https://vimeo.com/417775951" controls/>
+                    <div className={s.playerContainer}>
+                        <ReactPlayer
+                            width={'750px'}
+                            height={'440px'}
+                            url="https://vimeo.com/417775951" controls/>
+                    </div>
                 </Container>
             </section>
             <InfoBlock/>
             <MainReviews/>
-            
+
         </div>
     )
 }
