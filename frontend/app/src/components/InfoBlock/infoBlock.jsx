@@ -13,7 +13,7 @@ const InfoBlock = () => {
 
     const {ref, inView} = useInView({
         /* Optional options */
-        threshold: 0.15,
+        threshold: 0.1,
     });
 
     let classes = [s.infoBlock__item]

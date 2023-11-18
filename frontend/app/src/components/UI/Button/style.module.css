@@ -31,7 +31,7 @@
 .secondary {
     color: var(--bg-color);
     background: var(--secondary-color-3);
-    border: 2px solid var(--secondary-color-3);
+    border: 1px solid var(--secondary-color-3);
 }
 
 .size_m {
@@ -52,6 +52,16 @@
 
 .rounded {
     border-radius: 104px;
+}
+
+.secondary:hover {
+    background: transparent;
+    color: var(--secondary-color-3);
+}
+
+.primary:hover {
+    color: var(--bg-color);
+    background: var(--secondary-color-3);
 }
 
 .btn:active {
