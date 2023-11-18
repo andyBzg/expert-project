@@ -22,7 +22,7 @@
     height: 304px;
     position: relative;
     top: 60px;
-    right: -11px;
+    right: -4px;
     transform: rotateX(18deg);
     z-index: -1;
 }
@@ -38,7 +38,7 @@
     height: 285px;
     position: relative;
     top: 50%;
-    transform: translate(60%, -50%);
+    transform: translate(57%, -50%);
 }
 
 .mainTop__center {
