@@ -26,12 +26,15 @@
     color: var(--secondary-color-3);
     border: 1px solid var(--primary-color);
     background-color: transparent;
+    transition: background-color 0.5s, color 0.5s;
 }
 
 .secondary {
     color: var(--bg-color);
     background: var(--secondary-color-3);
     border: 1px solid var(--secondary-color-3);
+    transition: background-color 0.5s, color 0.5s;
+
 }
 
 .size_m {
@@ -54,12 +57,20 @@
     border-radius: 104px;
 }
 
-.secondary:hover {
+.secondary:hover, .secondary:focus {
     background: transparent;
     color: var(--secondary-color-3);
 }
 
-.primary:hover {
+.secondary:focus {
+    -moz-outline-radius: 104px;
+}
+
+.primary:focus {
+    -moz-outline-radius: 104px;
+}
+
+.primary:hover, .primary:focus {
     color: var(--bg-color);
     background: var(--secondary-color-3);
 }
