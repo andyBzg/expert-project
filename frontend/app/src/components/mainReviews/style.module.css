@@ -4,7 +4,7 @@
     min-height: 380px;
     margin-bottom: 150px;
     display: grid;
-    justify-content: space-between;
+    justify-content: center;
     justify-items: center;
 }
 
@@ -26,7 +26,7 @@
 
 .reviewItem {
     padding: 25px;
-    width: 490px;
+    max-width: 485px;
     min-height: 220px;
     display: flex;
     justify-content: center;

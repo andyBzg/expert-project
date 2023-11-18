@@ -4,27 +4,28 @@ import s from './style.module.css'
 import Button from '../../components/UI/Button'
 import CategoryList from '../../components/CategoryList'
 import ReactPlayer from 'react-player'
-import {Link} from 'react-router-dom'
 import PopCategoryList from "../../components/popCategoryList/popCategoryList";
 import ExpertSlider from "../../components/expertsSlider/expertSlider";
 import Solution from "../../components/Solution/Solution";
 import InfoBlock from "../../components/InfoBlock/infoBlock";
 import MainReviews from "../../components/mainReviews/mainReviews";
+import MainTop from "../../components/mainTop/mainTop";
 
 export default function MainPage() {
     return (
         <div className={s.page}>
-            <Container className={s.poster}>
-                <h1 className={s.title}>Есть вопрос? Задай эксперту!</h1>
-                <div className={s.buttons}>
-                    <Button variant={"primary"} size={'size_xl'} uppercase={'uppercase'} to={'/'}>
-                        задать вопрос
-                    </Button>
-                    <Button variant={"outlined"} size={'size_xl'} to={'/'}>
-                        Заданные вопросы
-                    </Button>
-                </div>
-            </Container>
+            {/*<Container className={s.poster}>*/}
+            {/*    <h1 className={s.title}>Есть вопрос? Задай эксперту!</h1>*/}
+            {/*    <div className={s.buttons}>*/}
+            {/*        <Button variant={"primary"} size={'size_xl'} uppercase={'uppercase'} to={'/'}>*/}
+            {/*            задать вопрос*/}
+            {/*        </Button>*/}
+            {/*        <Button variant={"outlined"} size={'size_xl'} to={'/'}>*/}
+            {/*            Заданные вопросы*/}
+            {/*        </Button>*/}
+            {/*    </div>*/}
+            {/*</Container>*/}
+            <MainTop/>
             <CategoryList/>
             <PopCategoryList popCategoriesColumn={3}/>
             <Solution/>

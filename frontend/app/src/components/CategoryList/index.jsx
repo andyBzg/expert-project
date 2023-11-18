@@ -8,11 +8,11 @@ const CategoryList = () => {
     const categories = useSelector(state => state.categories.list)
     return (
         <Container className={s.container}>
-            <div className={s.category_list}>
+            <nav className={s.category_list}>
                 {
                     categories.map(el => <CategoryItem {...el} key={el.categoryId}/>)
                 }
-            </div>
+            </nav>
         </Container>
     );
 };

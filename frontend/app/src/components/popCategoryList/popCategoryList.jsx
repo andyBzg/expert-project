@@ -16,7 +16,7 @@ const PopCategoryList = ({popCategoriesColumn}) => {
     const categories = useSelector(state => state.categories.list)
     return (
         <div>
-            <Container>
+            <Container className={s.container}>
                 <h2 className={s.popCategories__title}>Задай питання експерту</h2>
                 <div className={classes.join(' ')}>
                     {

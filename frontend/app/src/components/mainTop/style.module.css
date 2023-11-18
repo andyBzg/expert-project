@@ -1,0 +1,131 @@
+.mainTop {
+    width: 100%;
+    height: 515px;
+    background: linear-gradient(133deg, #161453 -9.58%, #3433CD 58.68%);
+}
+
+.container {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: 1fr 5fr 1fr;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+}
+
+.mainTopDecor {
+    width: 350px;
+}
+
+.mainTopDecor img {
+    width: 277px;
+    height: 304px;
+    position: relative;
+    top: 60px;
+    right: -11px;
+    transform: rotateX(18deg);
+    z-index: -1;
+}
+
+.mainTop__plane {
+    width: 380px;
+    height: 515px;
+    position: absolute;
+}
+
+.mainTop__plane img {
+    width: 255px;
+    height: 285px;
+    position: relative;
+    top: 50%;
+    transform: translate(60%, -50%);
+}
+
+.mainTop__center {
+    max-width: 805px;
+    display: grid;
+    grid-template-rows: 2fr 1fr 2fr;
+    height: 515px;
+    justify-items: center;
+    gap: 10px;
+}
+
+.mainTop__title {
+    align-self: end;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 64px;
+    color: var(--bg-color);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.mainTop__subtitle {
+    align-self: start;
+    font-size: var(--font-size-l);
+    font-weight: 700;
+    line-height: var(--font-line-m);
+    color: var(--bg-color);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.mainTop__search label {
+    padding: 0 30px;
+    display: block;
+    position: relative;
+    height: 100%;
+}
+
+.mainTop__search {
+    align-self: center;
+    width: 100%;
+}
+
+.inputSearch {
+    padding-right: 85px;
+    height: 45px;
+    border-radius: 20px;
+    border: none;
+}
+
+.inputSearch:active, .inputSearch:focus {
+    outline: none;
+}
+
+.btnSearch {
+    position: absolute;
+    right: 33px;
+    top: 8px;
+    width: 72px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: var(--secondary-color-3);
+    cursor: pointer;
+}
+
+.btnSearch:active {
+    background-color: #4b4aff;
+}
+
+.btnSearch i {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scaleX(-1);
+    font-size: var(--font-size-l);
+    color: var(--bg-color);
+}
+
+
+.mainTopDecor2 img {
+    width: 288px;
+    height: 215px;
+    position: relative;
+    top: 111px;
+    right: 104px;
+
+}
+
