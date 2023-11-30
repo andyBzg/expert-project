@@ -28,6 +28,7 @@ This Project is developed using the following technologies and libraries:
 * Spring Boot
 * Spring Web MVC
 * MySQL
+* Redis
 * Hibernate
 * JUnit5 and Mockito
 * Maven
