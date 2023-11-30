@@ -1,24 +1,27 @@
 package com.example.expertprojectbackend.security.service.impl;
 
-import com.example.expertprojectbackend.shared.event.UserRegistrationEvent;
 import com.example.expertprojectbackend.security.auth.AuthenticationRequest;
 import com.example.expertprojectbackend.security.auth.AuthenticationResponse;
 import com.example.expertprojectbackend.security.auth.RegisterRequest;
-import com.example.expertprojectbackend.security.user.User;
 import com.example.expertprojectbackend.security.repository.TokenRepository;
 import com.example.expertprojectbackend.security.service.AuthenticationService;
 import com.example.expertprojectbackend.security.service.JwtService;
 import com.example.expertprojectbackend.security.service.UserService;
 import com.example.expertprojectbackend.security.token.JwtToken;
 import com.example.expertprojectbackend.security.token.TokenType;
+import com.example.expertprojectbackend.security.user.User;
+import com.example.expertprojectbackend.shared.event.UserRegistrationEvent;
 import com.example.expertprojectbackend.shared.exception.PasswordMismatchException;
 import com.example.expertprojectbackend.shared.exception.UserAlreadyExistsException;
+import com.example.expertprojectbackend.shared.validation.ValidationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,9 +30,9 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
+@Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserService userService;
@@ -37,30 +40,31 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final ApplicationEventPublisher eventPublisher;
+    private final ValidationService validationService;
+    private final MessageSource messageSource;
 
 
     @Override
     public AuthenticationResponse register(RegisterRequest registerRequest, HttpServletRequest servletRequest) {
-        String username = registerRequest.email();
+        String email = registerRequest.email();
         String password = registerRequest.password();
         String passwordConfirmation = registerRequest.passwordConfirmation();
         String applicationUrl = getApplicationUrl(servletRequest);
 
-        if (!password.equals(passwordConfirmation)) {
-            throw new PasswordMismatchException("Password mismatch");
-        }
+        validationService.validateEmail(email);
+        validationService.validatePassword(password);
 
-        if (userService.userExists(username)) {
-            throw new UserAlreadyExistsException("Unable to register username, already exists in DB");
-        }
+        checkPasswordMismatch(password, passwordConfirmation);
+        checkUserExists(email);
 
-        User user = userService.registerCredentials(username, password);
+        User user = userService.registerCredentials(email, password);
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
 
         saveUserToken(user, jwtToken);
         publishRegistrationEvent(registerRequest, applicationUrl);
-        log.info("New user successfully registered and waiting for email verification");
+        log.info(messageSource.getMessage(
+                "log.registration.success", null, LocaleContextHolder.getLocale()));
 
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
@@ -68,18 +72,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
     }
 
-    public String getApplicationUrl(HttpServletRequest request) {
-        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-    }
-
-    private void publishRegistrationEvent(RegisterRequest request, String applicationUrl) {
-        User user = new User();
-        user.setUsername(request.email());
-        eventPublisher.publishEvent(new UserRegistrationEvent(user, applicationUrl));
-    }
-
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        validationService.validateEmail(request.email());
+        validationService.validatePassword(request.password());
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.email(),
@@ -128,6 +125,45 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
     }
 
+    private String getApplicationUrl(HttpServletRequest request) {
+        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+    }
+
+    private void checkUserExists(String email) {
+        if (userService.userExists(email)) {
+            String msg = messageSource.getMessage(
+                    "exc.username.exists", null, LocaleContextHolder.getLocale());
+            log.error(msg);
+            throw new UserAlreadyExistsException(msg);
+        }
+    }
+
+    private void checkPasswordMismatch(String password, String passwordConfirmation) {
+        if (!password.equals(passwordConfirmation)) {
+            String msg = messageSource.getMessage(
+                    "exc.password.mismatch", null, LocaleContextHolder.getLocale());
+            log.error(msg);
+            throw new PasswordMismatchException(msg);
+        }
+    }
+
+    private void saveUserToken(User user, String jwtToken) {
+        JwtToken token = JwtToken.builder()
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .expired(false)
+                .revoked(false)
+                .build();
+        tokenRepository.save(token);
+    }
+
+    private void publishRegistrationEvent(RegisterRequest request, String applicationUrl) {
+        User user = new User();
+        user.setUsername(request.email());
+        eventPublisher.publishEvent(new UserRegistrationEvent(user, applicationUrl));
+    }
+
     private void revokeAllUserTokens(User user) {
         List<JwtToken> validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
 
@@ -140,16 +176,5 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             token.setRevoked(true);
         });
         tokenRepository.saveAll(validUserTokens);
-    }
-
-    private void saveUserToken(User user, String jwtToken) {
-        JwtToken token = JwtToken.builder()
-                .user(user)
-                .token(jwtToken)
-                .tokenType(TokenType.BEARER)
-                .expired(false)
-                .revoked(false)
-                .build();
-        tokenRepository.save(token);
     }
 }
