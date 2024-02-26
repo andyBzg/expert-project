@@ -26,14 +26,17 @@ To install and run the Application, follow these steps:
 This Project is developed using the following technologies and libraries:
 
 * Spring Boot
-* Spring Web MVC
+* Spring Security
+* Spring Web
+* Hibernate
 * MySQL
 * Redis
-* Hibernate
+* JSON Web Tokens (JWT)
+* Lombok
 * JUnit5 and Mockito
 * Maven
 * Docker
-* Swagger
+* Swagger UI
 
 ## Contributing
 
